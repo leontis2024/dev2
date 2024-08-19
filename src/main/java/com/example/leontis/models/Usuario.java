@@ -1,9 +1,6 @@
 package com.example.leontis.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -18,7 +15,8 @@ private String id;
 @NotNull(message = "O nome não pode ser nulo")
 @Size(min = 3, message = "O nome deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "O nome deve ter menos de 100 carcteres")
-private String nm_usuario;
+@Column(name = "nm_usuario")
+private String nome;
 @NotNull(message = "O sobrenome não pode ser nulo")
 @Size(min = 3, message = "O sobrenome deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "O sobrenome deve ter menos de 100 carcteres")
@@ -26,12 +24,15 @@ private String sobrenome;
 @NotNull(message = "O email não pode ser nulo")
 @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
         flags = Pattern.Flag.CASE_INSENSITIVE)
-private String email_usuario;
+@Column(name = "email_usuario")
+private String email;
 @Size(min = 9, max = 20, message = "O telefone deve ter 11 caracteres")
-private String nr_tel_usuario;
+@Column(name = "nt_tel_usuatio")
+private String telefone;
 @NotNull(message = "A data de nascimento não pode ser nula")
 @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD")
-private String dt_nasci_usuario;
+@Column(name = "dt_nasci_usuario")
+private String dataNascimento;
 @Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres")
 @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres")
 private String biografia;
@@ -43,94 +44,23 @@ private String apelido;
 @NotNull(message = "A senha não pode ser nulo")
 @Size(min = 3, message = "A senha deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "A senha deve ter menos de 100 carcteres")
-private String senha_usuario;
+@Column(name = "senha_usuario")
+private String senha;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nm_usuario, String sobrenome, String email_usuario, String nr_tel_usuario, String  dt_nasci_usuario, String biografia, String sexo, String apelido, String senha_usuario) {
+    public Usuario(String id, String nome, String sobrenome, String email, String telefone, String dataNascimento, String biografia, String sexo, String apelido, String senha) {
         this.id = id;
-        this.nm_usuario = nm_usuario;
+        this.nome = nome;
         this.sobrenome = sobrenome;
-        this.email_usuario = email_usuario;
-        this.nr_tel_usuario = nr_tel_usuario;
-        this.dt_nasci_usuario = dt_nasci_usuario;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
         this.biografia = biografia;
         this.sexo = sexo;
         this.apelido = apelido;
-        this.senha_usuario = senha_usuario;
-    }
-
-    public String getSenha_usuario() {
-        return senha_usuario;
-    }
-
-    public void setSenha_usuario(String senha_usuario) {
-        this.senha_usuario = senha_usuario;
-    }
-
-    public String getApelido() {
-        return apelido;
-    }
-
-    public void setApelido(String apelido) {
-        this.apelido = apelido;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
-
-    public String getDt_nasci_usuario() {
-        return dt_nasci_usuario;
-    }
-
-    public void setDt_nasci_usuario(String dt_nasci_usuario) {
-        this.dt_nasci_usuario = dt_nasci_usuario;
-    }
-
-    public String getNr_tel_usuario() {
-        return nr_tel_usuario;
-    }
-
-    public void setNr_tel_usuario(String nr_tel_usuario) {
-        this.nr_tel_usuario = nr_tel_usuario;
-    }
-
-    public String getEmail_usuario() {
-        return email_usuario;
-    }
-
-    public void setEmail_usuario(String email_usuario) {
-        this.email_usuario = email_usuario;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getNm_usuario() {
-        return nm_usuario;
-    }
-
-    public void setNm_usuario(String nm_usuario) {
-        this.nm_usuario = nm_usuario;
+        this.senha = senha;
     }
 
     public String getId() {
@@ -141,19 +71,93 @@ private String senha_usuario;
         this.id = id;
     }
 
+    public @NotNull(message = "O nome não pode ser nulo") @Size(min = 3, message = "O nome deve ter pelo menos 3 carcteres") @Size(max = 100, message = "O nome deve ter menos de 100 carcteres") String getNome() {
+        return nome;
+    }
+
+    public void setNome(@NotNull(message = "O nome não pode ser nulo") @Size(min = 3, message = "O nome deve ter pelo menos 3 carcteres") @Size(max = 100, message = "O nome deve ter menos de 100 carcteres") String nome) {
+        this.nome = nome;
+    }
+
+    public @NotNull(message = "O sobrenome não pode ser nulo") @Size(min = 3, message = "O sobrenome deve ter pelo menos 3 carcteres") @Size(max = 100, message = "O sobrenome deve ter menos de 100 carcteres") String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(@NotNull(message = "O sobrenome não pode ser nulo") @Size(min = 3, message = "O sobrenome deve ter pelo menos 3 carcteres") @Size(max = 100, message = "O sobrenome deve ter menos de 100 carcteres") String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public @NotNull(message = "O email não pode ser nulo") @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE) String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotNull(message = "O email não pode ser nulo") @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE) String email) {
+        this.email = email;
+    }
+
+    public @Size(min = 9, max = 20, message = "O telefone deve ter 11 caracteres") String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(@Size(min = 9, max = 20, message = "O telefone deve ter 11 caracteres") String telefone) {
+        this.telefone = telefone;
+    }
+
+    public @NotNull(message = "A data de nascimento não pode ser nula") @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD") String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(@NotNull(message = "A data de nascimento não pode ser nula") @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD") String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public @Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(@Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String biografia) {
+        this.biografia = biografia;
+    }
+
+    public @NotNull(message = "O sexo não pode ser nulo") String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(@NotNull(message = "O sexo não pode ser nulo") String sexo) {
+        this.sexo = sexo;
+    }
+
+    public @Size(min = 3, message = "A biografia deve ter pelo menos 3 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(@Size(min = 3, message = "A biografia deve ter pelo menos 3 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String apelido) {
+        this.apelido = apelido;
+    }
+
+    public @NotNull(message = "A senha não pode ser nulo") @Size(min = 3, message = "A senha deve ter pelo menos 3 carcteres") @Size(max = 100, message = "A senha deve ter menos de 100 carcteres") String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(@NotNull(message = "A senha não pode ser nulo") @Size(min = 3, message = "A senha deve ter pelo menos 3 carcteres") @Size(max = 100, message = "A senha deve ter menos de 100 carcteres") String senha) {
+        this.senha = senha;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id +
-                ", nm_usuario='" + nm_usuario + '\'' +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
-                ", email_usuario='" + email_usuario + '\'' +
-                ", nr_tel_usuario='" + nr_tel_usuario + '\'' +
-                ", dt_nasci_usuario=" + dt_nasci_usuario +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
                 ", biografia='" + biografia + '\'' +
                 ", sexo='" + sexo + '\'' +
                 ", apelido='" + apelido + '\'' +
-                ", senha_usuario='" + senha_usuario + '\'' +
+                ", senha='" + senha + '\'' +
                 '}';
     }
 }
