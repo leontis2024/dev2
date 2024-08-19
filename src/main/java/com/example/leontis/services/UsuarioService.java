@@ -21,6 +21,12 @@ public class UsuarioService {
         return  usuarioRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Usuario não encontrado"));
     }
+    public Usuario buscarUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail_usuarioLikeIgnoreCase(email);
+    }
+    public Usuario buscarUsuarioPorTelefone(String telefone) {
+      return   usuarioRepository.findByNr_tel_usuarioLikeIgnoreCase(telefone);
+    }
     public List<Usuario> buscarTodosOsUsuarios() {
         return usuarioRepository.findAll();
     }

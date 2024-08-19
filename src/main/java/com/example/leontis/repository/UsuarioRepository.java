@@ -12,6 +12,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     @Modifying
     @Query("DELETE FROM Usuario e WHERE e.id = ?1")
     void deleteById(Long id);
+    Usuario findByEmail_usuarioLikeIgnoreCase(String email);
+    Usuario findByNr_tel_usuarioLikeIgnoreCase(String tel);
 
 
 
