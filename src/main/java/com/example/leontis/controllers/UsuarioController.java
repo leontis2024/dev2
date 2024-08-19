@@ -80,19 +80,19 @@ public class UsuarioController {
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
             if (updates.containsKey("nm_usuario")) {
-                usuario1.setNm_usuario(updates.get("nm_usuario").toString());
+                usuario1.setNome(updates.get("nm_usuario").toString());
             }
             if (updates.containsKey("sobrenome")){
                 usuario1.setSobrenome(updates.get("sobrenome").toString());
             }
             if (updates.containsKey("email_usuario")) {
-                usuario1.setEmail_usuario(updates.get("email_usuario").toString());
+                usuario1.setEmail(updates.get("email_usuario").toString());
             }
             if (updates.containsKey("nr_tel_usuario")) {
-                usuario1.setNr_tel_usuario(updates.get("nr_tel_usuario").toString());
+                usuario1.setTelefone(updates.get("nr_tel_usuario").toString());
             }
             if (updates.containsKey("dt_nasci_usuario")) {
-                usuario1.setDt_nasci_usuario(updates.get("dt_nasci_usuario").toString() );
+                usuario1.setDataNascimento(updates.get("dt_nasci_usuario").toString() );
             }
             if (updates.containsKey("biografia")){
                 usuario1.setBiografia(updates.get("biografia").toString());
@@ -104,7 +104,7 @@ public class UsuarioController {
                 usuario1.setApelido(updates.get("apelido").toString());
             }
             if (updates.containsKey("senha_usuario")) {
-                usuario1.setSenha_usuario(updates.get("senha_usuario").toString());
+                usuario1.setSenha(updates.get("senha_usuario").toString());
             }
             Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario1);
             if (!violations.isEmpty()) {
