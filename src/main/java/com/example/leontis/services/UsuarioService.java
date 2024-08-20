@@ -17,20 +17,38 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository) {
            this.usuarioRepository = usuarioRepository;
         }
+
+// método para buscar usuario por id, se o usuario não for encontrado uma
+//  runtimeexception será lançada para ser tratada no controler
     public Usuario buscarUsuarioPorId(String id) {
         return  usuarioRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Usuario não encontrado"));
     }
+
+// método para buscar usuario por email
     public Usuario buscarUsuarioPorEmail(String email) {
         return usuarioRepository.findByEmail_usuarioLikeIgnoreCase(email);
     }
+
+// método para buscar usuario por telefone
     public Usuario buscarUsuarioPorTelefone(String telefone) {
       return   usuarioRepository.findByNr_tel_usuarioLikeIgnoreCase(telefone);
     }
+
+//    método para buscar todos os usuarios
     public List<Usuario> buscarTodosOsUsuarios() {
         return usuarioRepository.findAll();
     }
+
+//    método para salvar usuario que pode ser usado  para atualizar
     public Usuario salvar(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    //    método para salvar usuario que pode ser usado para inserir
+    public Usuario inserir(Usuario usuario) {
+
+//        logica para gerar o id do usuário aleatorio com 5 digitos
         Random random = new Random();
         int num1 = random.nextInt(0, 9);
         int num2 = random.nextInt(0, 9);
@@ -57,6 +75,8 @@ public class UsuarioService {
         usuario.setId(numeroConta);
         return usuarioRepository.save(usuario);
     }
+
+//    método para excluir usuario
     public Usuario excluirUsuario(String id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()){

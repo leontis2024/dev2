@@ -7,49 +7,70 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.util.Date;
-
+//Entidade da tabela usuário
 @Entity
 public class Usuario {
+//    Id do usuário é uma string de cinco caracteres
 @Id
 private String id;
+
+// o nome do usuário é uma string not null que deve ter no minimo tres caracteres e no máximo 100
 @NotNull(message = "O nome não pode ser nulo")
 @Size(min = 3, message = "O nome deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "O nome deve ter menos de 100 carcteres")
 @Column(name = "nm_usuario")
 private String nome;
+
+//   o sobrenome do usuário é uma string not null que deve ter no minimo tres caracteres e no máximo 100
 @NotNull(message = "O sobrenome não pode ser nulo")
 @Size(min = 3, message = "O sobrenome deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "O sobrenome deve ter menos de 100 carcteres")
 private String sobrenome;
+
+// o email é uma string not null que deve estar no formato email@email.com e não pode ser nula
 @NotNull(message = "O email não pode ser nulo")
 @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
         flags = Pattern.Flag.CASE_INSENSITIVE)
 @Column(name = "email_usuario")
 private String email;
+
+// o número de telefone é uma string not null de no minimo 9 caracteres e no maximo 20
 @Size(min = 9, max = 20, message = "O telefone deve ter 11 caracteres")
+@NotNull(message = "O telefone não pode ser nulo")
 @Column(name = "nt_tel_usuatio")
 private String telefone;
-@NotNull(message = "A data de nascimento não pode ser nula")
+
+// a data de nascimento é uma string que deve estar no forma aaaa-mm-dd
 @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD")
 @Column(name = "dt_nasci_usuario")
 private String dataNascimento;
+
+// a biografia é uma string que deve ter pelo menos 10 caracteres e no maximo 100
 @Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres")
 @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres")
 private String biografia;
+
+// o sexo é uma string not null
 @NotNull(message = "O sexo não pode ser nulo")
 private String sexo;
-    @Size(min = 3, message = "A biografia deve ter pelo menos 3 carcteres")
-    @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres")
+
+// o apelido é uma string de no minimo 3 caracteres e no maximo 100
+@Size(min = 3, message = "A biografia deve ter pelo menos 3 carcteres")
+@Size(max = 100, message = "A biografia deve ter menos de 100 carcteres")
 private String apelido;
+
+// a senha é uma string not null que deve ter no minimo 3 caracteres e no maximo 100
 @NotNull(message = "A senha não pode ser nulo")
 @Size(min = 3, message = "A senha deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "A senha deve ter menos de 100 carcteres")
 @Column(name = "senha_usuario")
 private String senha;
 
+// Construtor vazio
     public Usuario() {
     }
 
+// Construtor com todos os atributos
     public Usuario(String id, String nome, String sobrenome, String email, String telefone, String dataNascimento, String biografia, String sexo, String apelido, String senha) {
         this.id = id;
         this.nome = nome;
@@ -63,6 +84,7 @@ private String senha;
         this.senha = senha;
     }
 
+//    Getters e Setters
     public String getId() {
         return id;
     }
@@ -145,6 +167,7 @@ private String senha;
         this.senha = senha;
     }
 
+//    To string com todos os atributos
     @Override
     public String toString() {
         return "Usuario{" +
