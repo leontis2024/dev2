@@ -37,7 +37,7 @@ private String email;
 // o número de telefone é uma string not null de no minimo 9 caracteres e no maximo 20
 @Size(min = 9, max = 20, message = "O telefone deve ter 11 caracteres")
 @NotNull(message = "O telefone não pode ser nulo")
-@Column(name = "nt_tel_usuatio")
+@Column(name = "nr_tel_usuario")
 private String telefone;
 
 // a data de nascimento é uma string que deve estar no forma aaaa-mm-dd
