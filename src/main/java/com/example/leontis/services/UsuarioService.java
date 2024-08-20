@@ -27,12 +27,12 @@ public class UsuarioService {
 
 // método para buscar usuario por email
     public Usuario buscarUsuarioPorEmail(String email) {
-        return usuarioRepository.findByEmail_usuarioLikeIgnoreCase(email);
+        return usuarioRepository.findByEmailLikeIgnoreCase(email);
     }
 
 // método para buscar usuario por telefone
     public Usuario buscarUsuarioPorTelefone(String telefone) {
-      return   usuarioRepository.findByNr_tel_usuarioLikeIgnoreCase(telefone);
+      return   usuarioRepository.findByTelefone(telefone);
     }
 
 //    método para buscar todos os usuarios
