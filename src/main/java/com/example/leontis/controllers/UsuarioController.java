@@ -26,10 +26,12 @@ public class UsuarioController {
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
+
     @GetMapping("/selecionarTodosUsuarios")
     public List<Usuario> buscarUsuarios() {
         return usuarioService.buscarTodosOsUsuarios();
     }
+
     @GetMapping("/selecionarUsuarioPorID/{id}")
     public ResponseEntity<?> buscarUsuarioPorId(@PathVariable String id){
         Usuario usuario = usuarioService.buscarUsuarioPorId(id);
@@ -38,6 +40,7 @@ public class UsuarioController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
+
     @GetMapping("/selecionarPorEmail")
     public ResponseEntity<?> buscarUsuarioPorEmail(@RequestParam  String email) {
         Usuario usuario=usuarioService.buscarUsuarioPorEmail(email);
@@ -47,6 +50,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.OK).body(usuario);
         }
     }
+
     @GetMapping("/selecionarPorTelefone")
     public ResponseEntity<?> buscarUsuarioPorTelefone(@RequestParam  String telefone) {
         Usuario usuario=usuarioService.buscarUsuarioPorEmail(telefone);
@@ -56,11 +60,13 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.OK).body(usuario);
         }
     }
+
     @PostMapping("/inserir")
     public ResponseEntity<?> inserirUsuario(@Valid @RequestBody Usuario usuario) {
-        Usuario usuario1 = usuarioService.salvar(usuario);
+        Usuario usuario1 = usuarioService.inserir(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario1.getId());
     }
+
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<String> excluirConta(@PathVariable String id) {
         Usuario usuario = usuarioService.buscarUsuarioPorId(id);
@@ -72,6 +78,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este usuário não existe");
         }
     }
+
     @PatchMapping("/atualizar/{id}")
     public ResponseEntity<String> atualizarUsuario(@PathVariable String id, @Valid @RequestBody Map<String, Object> updates) {
         try {
@@ -122,6 +129,8 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
     }
+
+//    método generico para erros do @valid
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handler(MethodArgumentNotValidException ex) {
         StringBuilder mensagemDeErro = new StringBuilder("Erros de validação nos campos: ");
