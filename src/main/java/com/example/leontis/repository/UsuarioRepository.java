@@ -9,11 +9,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
+//    mudando o delete para fazer menos requisições no banco
     @Modifying
     @Query("DELETE FROM Usuario e WHERE e.id = ?1")
     void deleteById(Long id);
-    Usuario findByEmail_usuarioLikeIgnoreCase(String email);
-    Usuario findByNr_tel_usuarioLikeIgnoreCase(String tel);
+
+//  assinatura de um método para buscar usuário por parametros especificos
+    Usuario findByEmailLikeIgnoreCase(String email);
+    Usuario findByTelefone(String tel);
 
 
 
