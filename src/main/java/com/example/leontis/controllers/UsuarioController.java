@@ -2,6 +2,12 @@ package com.example.leontis.controllers;
 
 import com.example.leontis.models.Usuario;
 import com.example.leontis.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,12 +34,23 @@ public class UsuarioController {
     }
 
     @GetMapping("/selecionarTodosUsuarios")
+    @Operation(summary = "Lista todos os usuários", description = "Retorna uma lista de todos os usuários cadastrados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Lista de usuários retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Usuario.class))),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
+    })
     public List<Usuario> buscarUsuarios() {
         return usuarioService.buscarTodosOsUsuarios();
     }
 
     @GetMapping("/selecionarUsuarioPorID/{id}")
-    public ResponseEntity<?> buscarUsuarioPorId(@PathVariable String id){
+    @Operation(summary = "Retorna o usuário pelo ID", description = "Retorna um usuário de acordo com ID que foi passado como parametro")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Usuário retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Usuario.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o usuário",content = @Content),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
+    })
+    public ResponseEntity<?> buscarUsuarioPorId(@Parameter(description = "ID do usuário a ser retornado")@PathVariable String id){
         Usuario usuario = usuarioService.buscarUsuarioPorId(id);
         if (usuario==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este usuário não existe");
@@ -42,7 +59,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/selecionarPorEmail")
-    public ResponseEntity<?> buscarUsuarioPorEmail(@RequestParam  String email) {
+    @Operation(summary = "Retorna o usuário pelo email", description = "Retorna um usuário de acordo com email que foi passado como parametro")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Usuário retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Usuario.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o usuário",content = @Content),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
+    })
+    public ResponseEntity<?> buscarUsuarioPorEmail(@Parameter(description = "Email do usuário a ser retornado")@RequestParam  String email) {
         Usuario usuario=usuarioService.buscarUsuarioPorEmail(email);
         if (usuario==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar o usuário pelo email que foi informado");
@@ -52,23 +75,39 @@ public class UsuarioController {
     }
 
     @GetMapping("/selecionarPorTelefone")
-    public ResponseEntity<?> buscarUsuarioPorTelefone(@RequestParam  String telefone) {
-        Usuario usuario=usuarioService.buscarUsuarioPorEmail(telefone);
+    @Operation(summary = "Retorna o usuário pelo telefone", description = "Retorna um usuário de acordo com o telefone que foi passado como parametro")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Usuário retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Usuario.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o usuário",content = @Content),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
+    })
+    public ResponseEntity<?> buscarUsuarioPorTelefone(@Parameter(description = "Telefone do usuário a ser retornado")@RequestParam  String telefone) {
+        Usuario usuario=usuarioService.buscarUsuarioPorTelefone(telefone);
         if (usuario==null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar o usuário pelo email que foi informado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar o usuário pelo telefone que foi informado");
         }else {
             return ResponseEntity.status(HttpStatus.OK).body(usuario);
         }
     }
 
     @PostMapping("/inserir")
+    @Operation(summary = "Inserir usuário",description = "Insere um usuário no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Usuário inserido com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(example = "12345"))),
+            @ApiResponse(responseCode = "404",description = "Campos com entrada inesperada: Erro no campo preço:preço deve ser númerico",content = @Content)
+    })
     public ResponseEntity<?> inserirUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario usuario1 = usuarioService.inserir(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario1.getId());
     }
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<String> excluirConta(@PathVariable String id) {
+    @Operation(summary = "Excluir usuário por ID",description = "Remove um usuário do sistema pelo seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Usuário excluído com sucesso",content = @Content),
+            @ApiResponse(responseCode = "404",description = "Usuário não encontrado",content = @Content)
+    })
+    public ResponseEntity<String> excluirConta(@Parameter(description = "ID do usuário a ser excluído")@PathVariable String id) {
         Usuario usuario = usuarioService.buscarUsuarioPorId(id);
         if (usuario!=null){
             usuarioService.excluirUsuario(id);
@@ -80,26 +119,36 @@ public class UsuarioController {
     }
 
     @PatchMapping("/atualizar/{id}")
-    public ResponseEntity<String> atualizarUsuario(@PathVariable String id, @Valid @RequestBody Map<String, Object> updates) {
+    @Operation(summary = "Atualiza um usuário parciamente por ID",description = "Atualiza apenas os campos que o usuário quer de um usuário por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Produto alterado com sucesso",content = @Content),
+            @ApiResponse(responseCode = "400",description = "Campo com valor inesperado",content = @Content),
+            @ApiResponse(responseCode = "404",description = "O usuário não foi encontrado",content = @Content)
+    })
+    public ResponseEntity<String> atualizarUsuario(@Parameter(description = "ID do usuário a ser atualizado")@PathVariable String id,@io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Mapeamento de campos a serem atualizados com os novos valores",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = "object",example="{\"nome\":\"Samira\",\"sobrenome\":\"Souza\",\"email\":\"samira.souza@gmail.com\",\"telefone\":\"(11)96313-2047\",\"dataNascimento\":\"2007-08-04\",\"biografia\":\"Oi, eu sou a Samira e estou usando o Leontis\",\"sexo\":\"Feminino\",\"apelido\":\"Sam\",\"senha\":\"12345Sam\"}"))
+    ) @Valid @RequestBody Map<String, Object> updates) {
         try {
             Usuario usuario1 = usuarioService.buscarUsuarioPorId(id);
 
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
-            if (updates.containsKey("nm_usuario")) {
-                usuario1.setNome(updates.get("nm_usuario").toString());
+            if (updates.containsKey("nome")) {
+                usuario1.setNome(updates.get("nome").toString());
             }
             if (updates.containsKey("sobrenome")){
                 usuario1.setSobrenome(updates.get("sobrenome").toString());
             }
-            if (updates.containsKey("email_usuario")) {
-                usuario1.setEmail(updates.get("email_usuario").toString());
+            if (updates.containsKey("email")) {
+                usuario1.setEmail(updates.get("email").toString());
             }
-            if (updates.containsKey("nr_tel_usuario")) {
-                usuario1.setTelefone(updates.get("nr_tel_usuario").toString());
+            if (updates.containsKey("telefone")) {
+                usuario1.setTelefone(updates.get("telefone").toString());
             }
-            if (updates.containsKey("dt_nasci_usuario")) {
-                usuario1.setDataNascimento(updates.get("dt_nasci_usuario").toString() );
+            if (updates.containsKey("dataNascimento")) {
+                usuario1.setDataNascimento(updates.get("dataNascimento").toString() );
             }
             if (updates.containsKey("biografia")){
                 usuario1.setBiografia(updates.get("biografia").toString());
@@ -110,8 +159,8 @@ public class UsuarioController {
             if (updates.containsKey("apelido")) {
                 usuario1.setApelido(updates.get("apelido").toString());
             }
-            if (updates.containsKey("senha_usuario")) {
-                usuario1.setSenha(updates.get("senha_usuario").toString());
+            if (updates.containsKey("senha")) {
+                usuario1.setSenha(updates.get("senha").toString());
             }
             Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario1);
             if (!violations.isEmpty()) {
@@ -126,6 +175,7 @@ public class UsuarioController {
             usuarioService.salvar(usuario1);
             return ResponseEntity.status(HttpStatus.OK).body("Usuário alterado com sucesso!");
         }catch (RuntimeException re){
+            re.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
     }

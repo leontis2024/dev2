@@ -21,8 +21,10 @@ public class UsuarioService {
 // método para buscar usuario por id, se o usuario não for encontrado uma
 //  runtimeexception será lançada para ser tratada no controler
     public Usuario buscarUsuarioPorId(String id) {
-        return  usuarioRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Usuario não encontrado"));
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(RuntimeException::new);
+        return usuario;
+//        return  usuarioRepository.findById(id).orElseThrow(()->
+//                new RuntimeException("Usuario não encontrado"));
     }
 
 // método para buscar usuario por email
