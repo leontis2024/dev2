@@ -3,8 +3,10 @@ package com.example.leontis.services;
 import com.example.leontis.models.Usuario;
 import com.example.leontis.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -12,7 +14,8 @@ import java.util.Random;
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
-
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
            this.usuarioRepository = usuarioRepository;
@@ -44,7 +47,20 @@ public class UsuarioService {
 
 //    método para salvar usuario que pode ser usado  para atualizar
     public Usuario salvar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        jdbcTemplate.update("CALL atualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
+                usuario.getId(),
+                usuario.getNome(),
+                usuario.getSobrenome(),
+                usuario.getEmail(),
+                usuario.getTelefone(),
+                Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
+                usuario.getBiografia(),
+                usuario.getSexo(),
+                usuario.getApelido(),
+                usuario.getSenha(),
+                usuario.getUrlImagem());
+
+        return usuario;
     }
 
     //    método para salvar usuario que pode ser usado para inserir
@@ -75,17 +91,28 @@ public class UsuarioService {
             }
         }
         usuario.setId(numeroConta);
-        return usuarioRepository.save(usuario);
+        jdbcTemplate.update("CALL inserir_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
+                usuario.getId(),
+                usuario.getNome(),
+                usuario.getSobrenome(),
+                usuario.getEmail(),
+                usuario.getTelefone(),
+                Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
+                usuario.getBiografia(),
+                usuario.getSexo(),
+                usuario.getApelido(),
+                usuario.getSenha(),
+                usuario.getUrlImagem());
+
+        return usuario;
+
     }
 
 //    método para excluir usuario
     public Usuario excluirUsuario(String id){
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if (usuario.isPresent()){
-            usuarioRepository.deleteById(id);
-            return usuario.get();
-        }
-        return null;
+
+       jdbcTemplate.update("CALL deletar_usuario(?)",id);
+       return usuarioRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
 }

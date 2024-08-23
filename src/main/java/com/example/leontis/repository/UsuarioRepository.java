@@ -12,7 +12,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 //    mudando o delete para fazer menos requisições no banco
     @Modifying
     @Query("DELETE FROM Usuario e WHERE e.id = ?1")
-    void deleteById(Long id);
+    void deleteById(String id);
 
 //  assinatura de um método para buscar usuário por parametros especificos
     Usuario findByEmailLikeIgnoreCase(String email);

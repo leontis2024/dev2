@@ -108,27 +108,33 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404",description = "Usuário não encontrado",content = @Content)
     })
     public ResponseEntity<String> excluirConta(@Parameter(description = "ID do usuário a ser excluído")@PathVariable String id) {
-        Usuario usuario = usuarioService.buscarUsuarioPorId(id);
-        if (usuario!=null){
-            usuarioService.excluirUsuario(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Usuario excluido com sucesso");
-
-        }else {
+        try {
+            Usuario usuario = usuarioService.buscarUsuarioPorId(id);
+        }catch (RuntimeException re){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este usuário não existe");
         }
+        try{
+                usuarioService.excluirUsuario(id);
+                return ResponseEntity.status(HttpStatus.OK).body("Usuario excluido com sucesso");
+        }catch (RuntimeException re){
+            return ResponseEntity.status(HttpStatus.OK).body("Usuario excluido com sucesso");
+        }
+
+
+
     }
 
     @PatchMapping("/atualizar/{id}")
     @Operation(summary = "Atualiza um usuário parciamente por ID",description = "Atualiza apenas os campos que o usuário quer de um usuário por ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Produto alterado com sucesso",content = @Content),
+            @ApiResponse(responseCode = "200",description = "Usuario alterado com sucesso",content = @Content),
             @ApiResponse(responseCode = "400",description = "Campo com valor inesperado",content = @Content),
             @ApiResponse(responseCode = "404",description = "O usuário não foi encontrado",content = @Content)
     })
     public ResponseEntity<String> atualizarUsuario(@Parameter(description = "ID do usuário a ser atualizado")@PathVariable String id,@io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "Mapeamento de campos a serem atualizados com os novos valores",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = "object",example="{\"nome\":\"Samira\",\"sobrenome\":\"Souza\",\"email\":\"samira.souza@gmail.com\",\"telefone\":\"(11)96313-2047\",\"dataNascimento\":\"2007-08-04\",\"biografia\":\"Oi, eu sou a Samira e estou usando o Leontis\",\"sexo\":\"Feminino\",\"apelido\":\"Sam\",\"senha\":\"12345Sam\"}"))
+                    schema = @Schema(type = "object",example="{\"nome\":\"Samira\",\"sobrenome\":\"Souza\",\"email\":\"samira.souza@gmail.com\",\"telefone\":\"(11)96313-2047\",\"dataNascimento\":\"2007-08-04\",\"biografia\":\"Oi, eu sou a Samira e estou usando o Leontis\",\"sexo\":\"Feminino\",\"apelido\":\"Sam\",\"senha\":\"12345Sam\",\"urlImagem\":\"https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media\"}"))
     ) @Valid @RequestBody Map<String, Object> updates) {
         try {
             Usuario usuario1 = usuarioService.buscarUsuarioPorId(id);

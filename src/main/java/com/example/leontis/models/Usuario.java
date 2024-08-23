@@ -76,13 +76,17 @@ private String apelido;
 @Column(name = "senha_usuario")
 @Schema(description = "Senha da conta do usuário",example = "1234Senha")
 private String senha;
+// a url é o caminho da imagem no firebase
+@Column(name = "url_imagem")
+@Schema(description = "URL da imagem do usuário",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media")
+private String urlImagem;
 
 // Construtor vazio
     public Usuario() {
     }
 
 // Construtor com todos os atributos
-    public Usuario(String id, String nome, String sobrenome, String email, String telefone, String dataNascimento, String biografia, String sexo, String apelido, String senha) {
+    public Usuario(String id, String nome, String sobrenome, String email, String telefone, String dataNascimento, String biografia, String sexo, String apelido, String senha, String urlImagem) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -93,9 +97,10 @@ private String senha;
         this.sexo = sexo;
         this.apelido = apelido;
         this.senha = senha;
+        this.urlImagem = urlImagem;
     }
 
-//    Getters e Setters
+    //    Getters e Setters
     public String getId() {
         return id;
     }
@@ -178,7 +183,16 @@ private String senha;
         this.senha = senha;
     }
 
-//    To string com todos os atributos
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
+    }
+
+    //    To string com todos os atributos
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -192,6 +206,7 @@ private String senha;
                 ", sexo='" + sexo + '\'' +
                 ", apelido='" + apelido + '\'' +
                 ", senha='" + senha + '\'' +
+                ", urlImagem='" + urlImagem + '\'' +
                 '}';
     }
 }
