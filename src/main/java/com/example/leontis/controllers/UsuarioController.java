@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+@Tag(name="Usuario")
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
@@ -50,12 +54,16 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o usuário",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
-    public ResponseEntity<?> buscarUsuarioPorId(@Parameter(description = "ID do usuário a ser retornado")@PathVariable String id){
-        Usuario usuario = usuarioService.buscarUsuarioPorId(id);
-        if (usuario==null){
+    public ResponseEntity<?> buscarUsuarioPorId(@Parameter(description = "ID do usuário a ser retornado")@PathVariable Long id){
+        try {
+            Usuario usuario = usuarioService.buscarUsuarioPorId(id);
+            if (usuario == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este usuário não existe");
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(usuario);
+        }catch (RuntimeException re){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este usuário não existe");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
 
     @GetMapping("/selecionarPorEmail")
@@ -94,11 +102,25 @@ public class UsuarioController {
     @Operation(summary = "Inserir usuário",description = "Insere um usuário no sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Usuário inserido com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(example = "12345"))),
-            @ApiResponse(responseCode = "404",description = "Campos com entrada inesperada: Erro no campo preço:preço deve ser númerico",content = @Content)
+            @ApiResponse(responseCode = "404",description = "Campos com entrada inesperada: Erro no campo preço:preço deve ser númerico",content = @Content),
+            @ApiResponse(responseCode = "500",description = "Erro no servidor",content = @Content)
     })
     public ResponseEntity<?> inserirUsuario(@Valid @RequestBody Usuario usuario) {
-        Usuario usuario1 = usuarioService.inserir(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario1.getId());
+        try {
+            String usuarioId = usuarioService.inserir(usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioId);
+        } catch (RuntimeException e) {
+            // Tratamento da exceção RuntimeException lançada pelo serviço
+            String log = e.getMessage();
+            Pattern pattern = Pattern.compile("ERROR:.*");
+            Matcher matcher = pattern.matcher(log);
+            if (matcher.find()) {
+                String mesage =matcher.group();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao inserir usuário: " + mesage);
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao inserir usuário");
+        }
+
     }
 
     @DeleteMapping("/excluir/{id}")
@@ -107,7 +129,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200",description = "Usuário excluído com sucesso",content = @Content),
             @ApiResponse(responseCode = "404",description = "Usuário não encontrado",content = @Content)
     })
-    public ResponseEntity<String> excluirConta(@Parameter(description = "ID do usuário a ser excluído")@PathVariable String id) {
+    public ResponseEntity<String> excluirConta(@Parameter(description = "ID do usuário a ser excluído")@PathVariable Long id) {
         try {
             Usuario usuario = usuarioService.buscarUsuarioPorId(id);
         }catch (RuntimeException re){
@@ -129,22 +151,29 @@ public class UsuarioController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Usuario alterado com sucesso",content = @Content),
             @ApiResponse(responseCode = "400",description = "Campo com valor inesperado",content = @Content),
-            @ApiResponse(responseCode = "404",description = "O usuário não foi encontrado",content = @Content)
+            @ApiResponse(responseCode = "404",description = "O usuário não foi encontrado",content = @Content),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
-    public ResponseEntity<String> atualizarUsuario(@Parameter(description = "ID do usuário a ser atualizado")@PathVariable String id,@io.swagger.v3.oas.annotations.parameters.RequestBody(
+    public ResponseEntity<String> atualizarUsuario(@Parameter(description = "ID do usuário a ser atualizado")@PathVariable Long id,@io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "Mapeamento de campos a serem atualizados com os novos valores",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(type = "object",example="{\"nome\":\"Samira\",\"sobrenome\":\"Souza\",\"email\":\"samira.souza@gmail.com\",\"telefone\":\"(11)96313-2047\",\"dataNascimento\":\"2007-08-04\",\"biografia\":\"Oi, eu sou a Samira e estou usando o Leontis\",\"sexo\":\"Feminino\",\"apelido\":\"Sam\",\"senha\":\"12345Sam\",\"urlImagem\":\"https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media\"}"))
     ) @Valid @RequestBody Map<String, Object> updates) {
+        Usuario usuario1;
         try {
-            Usuario usuario1 = usuarioService.buscarUsuarioPorId(id);
+            usuario1 = usuarioService.buscarUsuarioPorId(id);
+        }catch (RuntimeException re){
+            re.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+        }
+        try {
 
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
             if (updates.containsKey("nome")) {
                 usuario1.setNome(updates.get("nome").toString());
             }
-            if (updates.containsKey("sobrenome")){
+            if (updates.containsKey("sobrenome")) {
                 usuario1.setSobrenome(updates.get("sobrenome").toString());
             }
             if (updates.containsKey("email")) {
@@ -154,9 +183,9 @@ public class UsuarioController {
                 usuario1.setTelefone(updates.get("telefone").toString());
             }
             if (updates.containsKey("dataNascimento")) {
-                usuario1.setDataNascimento(updates.get("dataNascimento").toString() );
+                usuario1.setDataNascimento(updates.get("dataNascimento").toString());
             }
-            if (updates.containsKey("biografia")){
+            if (updates.containsKey("biografia")) {
                 usuario1.setBiografia(updates.get("biografia").toString());
             }
             if (updates.containsKey("sexo")) {
@@ -179,11 +208,20 @@ public class UsuarioController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage.toString());
             }
             usuarioService.salvar(usuario1);
-            return ResponseEntity.status(HttpStatus.OK).body("Usuário alterado com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body("Usuario atualizado com sucesso");
+
         }catch (RuntimeException re){
-            re.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+            // Tratamento da exceção RuntimeException lançada pelo serviço
+            String log = re.getMessage();
+            Pattern pattern = Pattern.compile("ERROR:.*");
+            Matcher matcher = pattern.matcher(log);
+            if (matcher.find()) {
+                String mesage =matcher.group();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário: " + mesage);
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário");
         }
+
     }
 
 //    método generico para erros do @valid

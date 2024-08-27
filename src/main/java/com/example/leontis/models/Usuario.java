@@ -11,10 +11,10 @@ import java.util.Date;
 //Entidade da tabela usuário
 @Entity
 public class Usuario {
-//    Id do usuário é uma string de cinco caracteres
+//    Id do usuário é uma long de cinco digitos
 @Id
 @Schema(description = "ID único do usuário",example = "12345")
-private String id;
+private Long id;
 
 // o nome do usuário é uma string not null que deve ter no minimo tres caracteres e no máximo 100
 @NotNull(message = "O nome não pode ser nulo")
@@ -86,7 +86,7 @@ private String urlImagem;
     }
 
 // Construtor com todos os atributos
-    public Usuario(String id, String nome, String sobrenome, String email, String telefone, String dataNascimento, String biografia, String sexo, String apelido, String senha, String urlImagem) {
+    public Usuario(Long id, String nome, String sobrenome, String email, String telefone, String dataNascimento, String biografia, String sexo, String apelido, String senha, String urlImagem) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -101,11 +101,11 @@ private String urlImagem;
     }
 
     //    Getters e Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

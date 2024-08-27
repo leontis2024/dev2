@@ -1,8 +1,10 @@
 package com.example.leontis.services;
 
 import com.example.leontis.models.Usuario;
+import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class UsuarioService {
 
 // método para buscar usuario por id, se o usuario não for encontrado uma
 //  runtimeexception será lançada para ser tratada no controler
-    public Usuario buscarUsuarioPorId(String id) {
+    public Usuario buscarUsuarioPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(RuntimeException::new);
         return usuario;
 //        return  usuarioRepository.findById(id).orElseThrow(()->
@@ -47,26 +49,34 @@ public class UsuarioService {
 
 //    método para salvar usuario que pode ser usado  para atualizar
     public Usuario salvar(Usuario usuario) {
-        jdbcTemplate.update("CALL atualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getSobrenome(),
-                usuario.getEmail(),
-                usuario.getTelefone(),
-                Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
-                usuario.getBiografia(),
-                usuario.getSexo(),
-                usuario.getApelido(),
-                usuario.getSenha(),
-                usuario.getUrlImagem());
+        try {
+            // Atualiza na tabela utilizando a procedure aqtualizar_usuario
+            jdbcTemplate.update("CALL atualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
+                    usuario.getId(),
+                    usuario.getNome(),
+                    usuario.getSobrenome(),
+                    usuario.getEmail(),
+                    usuario.getTelefone(),
+                    Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
+                    usuario.getBiografia(),
+                    usuario.getSexo(),
+                    usuario.getApelido(),
+                    usuario.getSenha(),
+                    usuario.getUrlImagem());
 
-        return usuario;
+            return usuario;
+
+
+        }catch (DataAccessException e) {
+//           se pegar uma exceção que foi enraizada pela procedure lança um throw para ser tratado no controller
+            throw new RuntimeException("Erro ao atualizar usuário no banco de dados: " + e.getMessage(), e);
+        }
     }
 
     //    método para salvar usuario que pode ser usado para inserir
-    public Usuario inserir(Usuario usuario) {
+    public String inserir(Usuario usuario) {
 
-//        logica para gerar o id do usuário aleatorio com 5 digitos
+        //        logica para gerar o id do usuário aleatorio com 5 digitos
         Random random = new Random();
         int num1 = random.nextInt(0, 9);
         int num2 = random.nextInt(0, 9);
@@ -74,10 +84,11 @@ public class UsuarioService {
         int num4 = random.nextInt(0, 9);
         int verificador = (num1+num2+num3+num4)%10;
         boolean continuar=true;
-        String numeroConta = ""+num1+num2+num3+num4+verificador;
+        String numero = ""+num1+num2+num3+num4+verificador;
+        Long idNumero = Long.parseLong(numero);
 
         while (continuar) {
-            Optional<Usuario> consta = usuarioRepository.findById(numeroConta);
+            Optional<Usuario> consta = usuarioRepository.findById(idNumero);
             if (consta.isPresent()) {
                 continuar=true;
                 num1 = random.nextInt(0, 9);
@@ -85,33 +96,42 @@ public class UsuarioService {
                 num3 = random.nextInt(0, 9);
                 num4 = random.nextInt(0, 9);
                 verificador = (num1 + num2 + num3 + num4) % 10;
-                numeroConta = ""+num1+num2+num3+num4+verificador;
+                numero = ""+num1+num2+num3+num4+verificador;
             }else {
                 continuar=false;
             }
         }
-        usuario.setId(numeroConta);
-        jdbcTemplate.update("CALL inserir_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getSobrenome(),
-                usuario.getEmail(),
-                usuario.getTelefone(),
-                Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
-                usuario.getBiografia(),
-                usuario.getSexo(),
-                usuario.getApelido(),
-                usuario.getSenha(),
-                usuario.getUrlImagem());
+        idNumero = Long.parseLong(numero);
+        // Insere na tabela utilizando a procedure inserir_usuarios
+        try {
+            jdbcTemplate.update("CALL inserir_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
+                    idNumero,
+                    usuario.getNome(),
+                    usuario.getSobrenome(),
+                    usuario.getEmail(),
+                    usuario.getTelefone(),
+                    Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
+                    usuario.getBiografia(),
+                    usuario.getSexo(),
+                    usuario.getApelido(),
+                    usuario.getSenha(),
+                    usuario.getUrlImagem());
+            usuario.setId(idNumero);
+            return usuario.getId().toString();
+        }catch (DataAccessException e) {
+//            se pegar uma exceção que foi enraizada pela procedure lança um throw para ser tratado no controller
+            throw new RuntimeException("Erro ao inserir usuário no banco de dados: " + e.getMessage(), e);
+        }
 
-        return usuario;
 
     }
 
 //    método para excluir usuario
-    public Usuario excluirUsuario(String id){
+    public Usuario excluirUsuario(Long id){
 
        jdbcTemplate.update("CALL deletar_usuario(?)",id);
+
+//       verifica se realmente foi excluido
        return usuarioRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
