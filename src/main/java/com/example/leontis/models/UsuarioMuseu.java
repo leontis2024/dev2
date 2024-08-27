@@ -18,13 +18,13 @@ public class UsuarioMuseu {
 //    o id do museu é um long de 5 digitos
     @Schema(description = "Id do museu",example = "12345")
     @Digits(integer = 5, fraction = 0)
-    @NotNull(message = "O sobrenome não pode ser nulo")
+    @NotNull(message = "O id_museu não pode ser nulo")
     @Column(name = "id_museu")
     private Long idMuseu;
 //    o id do usuário é um long de 5 digitos
     @Schema(description = "Id do usuário",example = "12345")
     @Digits(integer = 5, fraction = 0)
-    @NotNull(message = "O sobrenome não pode ser nulo")
+    @NotNull(message = "O id_usuario não pode ser nulo")
     @Column(name = "id_usuario")
     private Long idUsuario;
 
