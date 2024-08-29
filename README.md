@@ -52,7 +52,7 @@ http://localhost:8080/swagger-ui/index.html
  ### Commits Semânticos 
  - **Feat:** (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build) 
  - **Fix:** (correção de bug para o usuário, não uma correção para um script de build)
- - **docs:** (mudanças na documentação)
+ - **Docs:** (mudanças na documentação)
  - **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção)
  - **Refactor:** (refatoração de código de produção, por exemplo, renomeando uma variável) 
  - **Test:** (adicionando testes que estavam faltando, refatorando testes; nenhuma mudança no código de produção)
