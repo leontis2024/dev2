@@ -33,9 +33,9 @@ A *API REST* desenvolvida com *Spring Boot* permite que uma imagem cadastrada pe
  - [x] Criação da API de dados de cadastro(SQL)
  - [x] Contrução da parte da API para usuários(SQL)
  - [x] Contrução da parte da API para relação usuário/museu(SQL) 
- - [ ] Contrução da parte da API para relação usuário/gênero(SQL)
+ - [X] Contrução da parte da API para relação usuário/gênero(SQL)
  - [ ] Contrução da parte da API para obras(SQL)
- - [ ] Contrução da parte da API para gênero(SQL)
+ - [X] Contrução da parte da API para gênero(SQL)
  - [ ] Contrução da parte da API para guia(SQL)
  - [ ] Contrução da parte da API para relação obra/guia(SQL)
  - [ ] Contrução da parte da API para artistas(SQL)
@@ -51,7 +51,8 @@ http://localhost:8080/swagger-ui/index.html
 - */api/usuarioMuseu*: Gerenciamento de seguidores dos museus.
  ### Commits Semânticos 
  - **Feat:** (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build) 
- - **Fix:** (correção de bug para o usuário, não uma correção para um script de build) - docs: (mudanças na documentação) 
+ - **Fix:** (correção de bug para o usuário, não uma correção para um script de build)
+ - **Docs:** (mudanças na documentação) 
  - **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção) 
  - **Refactor:** (refatoração de código de produção, por exemplo, renomeando uma variável) 
  - **Test:** (adicionando testes que estavam faltando, refatorando testes; nenhuma mudança no código de produção)
