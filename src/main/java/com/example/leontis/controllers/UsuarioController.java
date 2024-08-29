@@ -26,7 +26,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Tag(name="Usuario")
+@Tag(name="Usuário")
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
