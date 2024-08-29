@@ -29,7 +29,8 @@ public class UsuarioGeneroService {
         return usuarios;
     }
 
-    public Long seguir(Long id_user, Long id_genero ){
+    //    método para adicionar relação usuario/genero
+    public Long adicionar(Long id_user, Long id_genero ){
         UsuarioGenero usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
         if (usuarioGenero != null) {
             return 0l;
@@ -72,8 +73,8 @@ public class UsuarioGeneroService {
         }
     }
 
-    //    método para excluir relação usuario/museu
-    public Boolean deixarSeguir(Long id_user, Long id_genero){
+    //    método para excluir relação usuario/genero
+    public Boolean excluir(Long id_user, Long id_genero){
 
         UsuarioGenero usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
         if (usuarioGenero == null) {
