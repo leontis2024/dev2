@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Usuario Genero")
+@Tag(name = "Usuário Gênero")
 @RestController
 @RequestMapping("/api/usuarioGenero")
 public class UsuarioGeneroController {
@@ -32,7 +32,7 @@ public class UsuarioGeneroController {
 
 
     @GetMapping("buscarPorUsuario")
-    @Operation(summary = "Lista todas as relações com genero de um usuário", description = "Retorna uma lista com a relação com genero de um usuário que foi passado como parametro")
+    @Operation(summary = "Lista todas as relações com gênero de um usuário", description = "Retorna uma lista com a relação com gênero de um usuário que foi passado como parametro")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Lista de relações retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = UsuarioGenero.class))),
             @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar as relações",content = @Content)
@@ -47,12 +47,12 @@ public class UsuarioGeneroController {
     }
 
     @PostMapping("/inserir")
-    @Operation(summary = "Cria a relação entre usuário/genero", description = "Cria a relação usuário/genero a partir de parametros e retorna o id se for inserido com sucesso")
+    @Operation(summary = "Cria a relação entre usuário/gênero", description = "Cria a relação usuário/gênero a partir de parametros e retorna o id se for inserido com sucesso")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "A relação foi criada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(example = "12345"))),
             @ApiResponse(responseCode = "400",description = "Não foi possivel criar a relação",content = @Content)
     })
-    public ResponseEntity<?> seguirMuseu(@Parameter(description = "ID do usuário que deve se relacionar com o genero")@Valid @RequestParam Long id_user,@Parameter(description = "ID do genero que deve se relacionar com o usuário") @RequestParam Long id_genero) {
+    public ResponseEntity<?> seguirMuseu(@Parameter(description = "ID do usuário que deve se relacionar com o gênero")@Valid @RequestParam Long id_user,@Parameter(description = "ID do genero que deve se relacionar com o usuário") @RequestParam Long id_genero) {
         Long id = usuarioGeneroService.adicionar(id_user, id_genero);
         if (id!=0l) {
             return ResponseEntity.status(HttpStatus.CREATED).body(id);
@@ -62,12 +62,12 @@ public class UsuarioGeneroController {
     }
 
     @DeleteMapping("/deletar")
-    @Operation(summary = "Exclui a relação entre usuário/genero", description = "Exclui a relação usuário/genero a partir de parametros e retorna o id se for inserido com sucesso")
+    @Operation(summary = "Exclui a relação entre usuário/gênero", description = "Exclui a relação usuário/gênero a partir de parametros e retorna o id se for inserido com sucesso")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "A relação foi excluida com sucesso",content = @Content),
             @ApiResponse(responseCode = "400",description = "Não foi possivel excluir a relação",content = @Content)
     })
-    public ResponseEntity<?> deixarSeguirMuseu(@Parameter(description = "ID do usuário que deve se relacionar com o genero")@Valid @RequestParam Long id_user,@Parameter(description = "ID do genero que deve se relacionar com o usuário") @RequestParam Long id_genero) {
+    public ResponseEntity<?> deixarSeguirMuseu(@Parameter(description = "ID do usuário que deve se relacionar com o gênero")@Valid @RequestParam Long id_user,@Parameter(description = "ID do genero que deve se relacionar com o usuário") @RequestParam Long id_genero) {
         Boolean apagar = usuarioGeneroService.excluir(id_user,id_genero);
         if (apagar) {
             return ResponseEntity.status(HttpStatus.OK).body("O usuário deixou de seguir o museu");

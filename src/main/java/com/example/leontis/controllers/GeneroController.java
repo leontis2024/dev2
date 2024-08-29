@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Tag(name = "Genero")
+@Tag(name = "Gênero")
 @RestController
 @RequestMapping("/api/Genero")
 public class GeneroController {
@@ -38,10 +38,10 @@ public class GeneroController {
         this.generoService = generoService;
     }
 
-    @Operation(summary = "Retorna o genero pelo ID", description = "Retorna um genero de acordo com ID que foi passado como parametro")
+    @Operation(summary = "Retorna o gênero pelo ID", description = "Retorna um gênero de acordo com ID que foi passado como parametro")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Genero retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Genero.class))),
-            @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o genero",content = @Content),
+            @ApiResponse(responseCode = "200",description = "Gênero retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Genero.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o gênero",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
     @JsonView(Views.Completo.class)
@@ -58,9 +58,9 @@ public class GeneroController {
         }
     }
 
-    @Operation(summary = "Retorna todos os generos ", description = "Retorna uma lista com todos os generos")
+    @Operation(summary = "Retorna todos os gêneros parcialmente", description = "Retorna uma lista com todos os gêneros trazendo apenas os campos id, nomeGenero e introdução")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Generos retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Genero.class))),
+            @ApiResponse(responseCode = "200",description = "Gêneros retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Genero.class))),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
     @JsonView(Views.Resumo.class)
@@ -69,6 +69,16 @@ public class GeneroController {
         return generoService.buscarTodas();
     }
 
+    @Operation(summary = "Retorna todos os gêneros", description = "Retorna uma lista com todos os gêneros trazendo apenas os campos id, nomeGenero e introdução")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Gêneros retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Genero.class))),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
+    })
+    @JsonView(Views.Completo.class)
+    @GetMapping("/selecionarTodosGeneros")
+    public List<Genero> buscarTodos() {
+        return generoService.buscarTodas();
+    }
 
 
 

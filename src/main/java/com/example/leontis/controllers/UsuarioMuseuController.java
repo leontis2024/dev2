@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Usuario Museu")
+@Tag(name = "Usuário Museu")
 @RestController
 @RequestMapping("/api/usuarioMuseu")
 public class UsuarioMuseuController {
