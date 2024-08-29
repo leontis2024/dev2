@@ -1,4 +1,4 @@
-package com.example.leontis;
+package com.example.leontis.config;
 
 public class Views {
     public static class Resumo {}
