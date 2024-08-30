@@ -1,6 +1,6 @@
 package com.example.leontis.models;
 
-import com.example.leontis.Views;
+import com.example.leontis.config.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;

@@ -1,10 +1,8 @@
 package com.example.leontis.controllers;
 
-import com.example.leontis.Views;
+import com.example.leontis.config.Views;
 import com.example.leontis.models.Genero;
-import com.example.leontis.models.Usuario;
 import com.example.leontis.services.GeneroService;
-import com.example.leontis.services.UsuarioService;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,14 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Tag(name = "Gênero")
 @RestController
-@RequestMapping("/api/Genero")
+@RequestMapping("/api/genero")
 public class GeneroController {
 
     private final GeneroService generoService;
