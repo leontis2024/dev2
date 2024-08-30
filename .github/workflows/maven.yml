@@ -10,9 +10,9 @@ name: Deploy no Render
 
 on:
   push:
-    branches: [ "qa" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "qa" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
