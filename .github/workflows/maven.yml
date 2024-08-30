@@ -29,3 +29,11 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package -DskipTests --file pom.xml
+
+    - name: Render Deploy Action
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        service-id: srv-cr8ds9tds78s73a0qmkg
+        api-key: rnd_dih4sNPo18BvhgOHhBfcokdHhY0q
+          
+      
