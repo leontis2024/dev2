@@ -23,7 +23,7 @@ import java.util.List;
 
 @Tag(name = "Gênero")
 @RestController
-@RequestMapping("/api/Genero")
+@RequestMapping("/api/genero")
 public class GeneroController {
 
     private final GeneroService generoService;
