@@ -47,7 +47,7 @@ public class UsuarioGenero {
         this.id = id;
     }
 
-    public @Digits(integer = 5, fraction = 0) @NotNull(message = "O id_genero não pode ser nulo") Long getIdGenero() {
+    public @Digits(integer = 5 , fraction = 0) @NotNull(message = "O id_genero não pode ser nulo") Long getIdGenero() {
         return idGenero;
     }
 
