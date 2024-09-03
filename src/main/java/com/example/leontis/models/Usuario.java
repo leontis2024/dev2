@@ -52,8 +52,7 @@ private String telefone;
 @Schema(description = "Data de nascimento do usuário",example = "2007-09-12")
 private String dataNascimento;
 
-// a biografia é uma string que deve ter pelo menos 10 caracteres e no maximo 100
-@Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres")
+// a biografia é uma string que deve ter no maximo 100
 @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres")
 @Schema(description = "Biografia do usuário",example = "Oi, meu nome é Ana Bia e estou usando o Leontis!")
 private String biografia;
