@@ -63,7 +63,6 @@ private String biografia;
 private String sexo;
 
 // o apelido é uma string de no minimo 3 caracteres e no maximo 100
-@Size(min = 3, message = "O apelido deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "O apelido deve ter menos de 100 carcteres")
 @Schema(description = "Apelido do usuário",example = "Bia")
 private String apelido;
@@ -166,11 +165,11 @@ private String urlImagem;
         this.sexo = sexo;
     }
 
-    public @Size(min = 3, message = "A biografia deve ter pelo menos 3 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String getApelido() {
+    public  @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String getApelido() {
         return apelido;
     }
 
-    public void setApelido(@Size(min = 3, message = "A biografia deve ter pelo menos 3 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String apelido) {
+    public void setApelido(@Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String apelido) {
         this.apelido = apelido;
     }
 
