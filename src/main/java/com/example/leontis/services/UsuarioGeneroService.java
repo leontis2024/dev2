@@ -4,6 +4,7 @@ import com.example.leontis.models.UsuarioGenero;
 import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.repository.UsuarioGeneroRepository;
 import com.example.leontis.repository.UsuarioMuseuRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class UsuarioGeneroService {
     }
 
     //    método para adicionar relação usuario/genero
+    @Transactional
     public Long adicionar(Long id_user, Long id_genero ){
         UsuarioGenero usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
         if (usuarioGenero != null) {
@@ -74,6 +76,7 @@ public class UsuarioGeneroService {
     }
 
     //    método para excluir relação usuario/genero
+    @Transactional
     public Boolean excluir(Long id_user, Long id_genero){
 
         UsuarioGenero usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);

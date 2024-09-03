@@ -3,6 +3,7 @@ package com.example.leontis.services;
 import com.example.leontis.models.Usuario;
 import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,7 +48,8 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-//    método para salvar usuario que pode ser usado  para atualizar
+//método para salvar usuario que pode ser usado  para atualizar
+    @Transactional
     public Usuario salvar(Usuario usuario) {
         try {
             // Atualiza na tabela utilizando a procedure aqtualizar_usuario
@@ -74,6 +76,7 @@ public class UsuarioService {
     }
 
     //    método para salvar usuario que pode ser usado para inserir
+    @Transactional
     public String inserir(Usuario usuario) {
 
         //        logica para gerar o id do usuário aleatorio com 5 digitos
@@ -127,6 +130,7 @@ public class UsuarioService {
     }
 
 //    método para excluir usuario
+    @Transactional
     public Usuario excluirUsuario(Long id){
 
        jdbcTemplate.update("CALL deletar_usuario(?)",id);
