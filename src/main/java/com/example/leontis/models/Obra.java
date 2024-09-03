@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Obra {
     @Id
     @Schema(description = "ID único da obra",example = "12345")
-    private long id;
+    private Long id;
     @Column(name = "ano_inicio")
     private String anoInicio;
     @Column(name = "ano_final")
@@ -20,11 +20,11 @@ public class Obra {
     @Column(name = "nm_obra")
     private String nomeObra;
     @Column(name = "id_genero")
-    private long idGenero;
+    private Long idGenero;
     @Column(name = "id_artista")
-    private long idArtista;
+    private Long idArtista;
     @Column(name = "id_museu")
-    private long idMuseu;
+    private Long idMuseu;
     @Column(name = "ulr_imagem")
     private String ulrImagem;
 
