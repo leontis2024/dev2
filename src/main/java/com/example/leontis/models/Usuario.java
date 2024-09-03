@@ -52,8 +52,8 @@ private String telefone;
 @Schema(description = "Data de nascimento do usuário",example = "2007-09-12")
 private String dataNascimento;
 
-// a biografia é uma string que deve ter no maximo 100
-@Size(max = 100, message = "A biografia deve ter menos de 100 carcteres")
+// a biografia é" uma string que deve ter no maximo 100
+@Size(max = 100, message = "A biografia pode ter no máximo 100 caracteres")
 @Schema(description = "Biografia do usuário",example = "Oi, meu nome é Ana Bia e estou usando o Leontis!")
 private String biografia;
 
@@ -150,11 +150,11 @@ private String urlImagem;
         this.dataNascimento = dataNascimento;
     }
 
-    public @Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String getBiografia() {
+    public  @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String getBiografia() {
         return biografia;
     }
 
-    public void setBiografia(@Size(min = 10, message = "A biografia deve ter pelo menos 10 carcteres") @Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String biografia) {
+    public void setBiografia(@Size(max = 100, message = "A biografia deve ter menos de 100 carcteres") String biografia) {
         this.biografia = biografia;
     }
 
