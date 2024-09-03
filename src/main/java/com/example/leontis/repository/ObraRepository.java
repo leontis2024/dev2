@@ -12,7 +12,8 @@ public interface ObraRepository extends JpaRepository<Obra, Long> {
     List<Obra> findByIdGenero(Long idGenero);
     List<Obra> findByIdMuseu(Long idMuseu);
     List<Obra> findByIdArtista(Long idArtista);
-    List<Obra> findAllOrderByNomeObraDesc();
+    List<Obra> findAllByOrderByNomeObraAsc();
+
 
 
 }

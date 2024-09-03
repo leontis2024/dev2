@@ -38,7 +38,7 @@ public class ObraService {
     }
 
     public List<Obra> buscarTudo(){
-        return obraRepository.findAllOrderByNomeObraDesc();
+        return obraRepository.findAllByOrderByNomeObraAsc();
     }
 
 }
