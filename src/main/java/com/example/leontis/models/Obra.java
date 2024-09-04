@@ -76,7 +76,7 @@ public class Obra {
         this.idGenero = idGenero;
         this.idArtista = idArtista;
         this.idMuseu = idMuseu;
-        this.ulrImagem = ulrImagem;
+        this.urlImagem = ulrImagem;
     }
 
     //    Getters e Setters
