@@ -59,8 +59,8 @@ public class Obra {
     // a url é o caminho da imagem no firebase
     @Size(max=500,message = "A URL da imagem deve ter no máximo 500 caracteres")
     @Schema(description = "URL da imagem",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media")
-    @Column(name = "ulr_imagem")
-    private String ulrImagem;
+    @Column(name = "url_imagem")
+    private String urlImagem;
 
     // Construtor vazio
     public Obra() {
@@ -145,11 +145,11 @@ public class Obra {
     }
 
     public String getUlrImagem() {
-        return ulrImagem;
+        return urlImagem;
     }
 
     public void setUlrImagem(String ulrImagem) {
-        this.ulrImagem = ulrImagem;
+        this.urlImagem = ulrImagem;
     }
 
     @Override
@@ -163,7 +163,7 @@ public class Obra {
                 ", idGenero=" + idGenero +
                 ", idArtista=" + idArtista +
                 ", idMuseu=" + idMuseu +
-                ", ulrImagem='" + ulrImagem + '\'' +
+                ", urlImagem='" + urlImagem + '\'' +
                 '}';
     }
 }
