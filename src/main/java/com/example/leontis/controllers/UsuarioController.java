@@ -197,6 +197,9 @@ public class UsuarioController {
             if (updates.containsKey("senha")) {
                 usuario1.setSenha(updates.get("senha").toString());
             }
+            if (updates.containsKey("urlImagem")){
+                usuario1.setUrlImagem(updates.get("urlImagem").toString());
+            }
             Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario1);
             if (!violations.isEmpty()) {
                 // Se houver violações de validação, lance uma exceção ou trate conforme necessário
