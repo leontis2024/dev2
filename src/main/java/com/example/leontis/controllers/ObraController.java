@@ -82,7 +82,7 @@ public class ObraController {
         }
     }
 
-    @GetMapping("/selecionarPorMuseu/{id}")
+    @GetMapping("/selecionarTudo")
     public ResponseEntity<?> buscarTodosOrdenadoPorNome() {
         List<Obra> obras= obraService.buscarTudo();
         if (obras.isEmpty()) {
