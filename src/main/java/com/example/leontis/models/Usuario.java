@@ -11,7 +11,7 @@ import java.util.Date;
 //Entidade da tabela usuário
 @Entity
 public class Usuario {
-//    Id do usuário é uma long de cinco digitos
+//    Id do usuário é um long de cinco digitos
 @Id
 @Schema(description = "ID único do usuário",example = "12345")
 private Long id;

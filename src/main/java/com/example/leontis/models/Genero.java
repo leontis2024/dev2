@@ -40,9 +40,11 @@ public class Genero {
     @Schema(description = "URL da imagem do gênero",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media")
     private String urlImagem;
 
+    // Construtor vazio
     public Genero() {
     }
 
+    // Construtor com todos os atributos
     public Genero(String urlImagem, String descGenero, String introducao, String nomeGenero, int id) {
         this.urlImagem = urlImagem;
         this.descGenero = descGenero;
@@ -51,6 +53,7 @@ public class Genero {
         this.id = id;
     }
 
+    //    Getters e Setters
     public int getId() {
         return id;
     }

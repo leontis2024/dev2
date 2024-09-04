@@ -52,5 +52,44 @@ public class ObraController {
         }
     }
 
+    @GetMapping("/selecionarPorGenero/{id}")
+    public ResponseEntity<?> buscarPorGenero(@Parameter(description = "ID do genero para retorno da lista de obras")@Valid @RequestParam Long id) {
+        List<Obra> obras= obraService.buscarPorGenero(id);
+        if (obras.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(obras);
+        }
+    }
+
+    @GetMapping("/selecionarPorMuseu/{id}")
+    public ResponseEntity<?> buscarPorMuseu(@Parameter(description = "ID do museu para retorno da lista de obras")@Valid @RequestParam Long id) {
+        List<Obra> obras= obraService.buscarPorGenero(id);
+        if (obras.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(obras);
+        }
+    }
+
+    @GetMapping("/selecionarPorArtista/{id}")
+    public ResponseEntity<?> buscarPorArtista(@Parameter(description = "ID do artista para retorno da lista de obras")@Valid @RequestParam Long id) {
+        List<Obra> obras= obraService.buscarPorArtista(id);
+        if (obras.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(obras);
+        }
+    }
+
+    @GetMapping("/selecionarPorMuseu/{id}")
+    public ResponseEntity<?> buscarTodosOrdenadoPorNome() {
+        List<Obra> obras= obraService.buscarTudo();
+        if (obras.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(obras);
+        }
+    }
 
 }
