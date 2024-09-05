@@ -31,7 +31,7 @@ public class UsuarioGeneroController {
     }
 
 
-    @GetMapping("buscarPorUsuario")
+    @GetMapping("/buscarPorUsuario")
     @Operation(summary = "Lista todas as relações com gênero de um usuário", description = "Retorna uma lista com a relação com gênero de um usuário que foi passado como parametro")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Lista de relações retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = UsuarioGenero.class))),

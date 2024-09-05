@@ -6,7 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 public class Guia {
 
@@ -34,71 +40,7 @@ public class Guia {
 
     // a url é o caminho da imagem no firebase
     @Size(max=500,message = "A URL da imagem deve ter no máximo 500 caracteres")
-    @Schema(description = "URL da imagem",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media")
+    @Schema(description = "URL da imagem",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/usuarios%2Fuser.webp?alt=media&token=47824e40-be55-4657-a518-28528dcba3f7")
     @Column(name = "url_imagem")
     private String urlImagem;
-
-    // Construtor vazio
-    public Guia() {
-    }
-
-    // Construtor com todos os atributos
-    public Guia(String urlImagem, Long idMuseu, String descGuia, String tituloGuia, Long id) {
-        this.urlImagem = urlImagem;
-        this.idMuseu = idMuseu;
-        this.descGuia = descGuia;
-        this.tituloGuia = tituloGuia;
-        this.id = id;
-    }
-    //    Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public @NotNull(message = "O titulo do guia não pode ser nulo") @Size(max = 100, message = "O titulo do guia deve ter no maximo 100 caracteres") String getTituloGuia() {
-        return tituloGuia;
-    }
-
-    public void setTituloGuia(@NotNull(message = "O titulo do guia não pode ser nulo") @Size(max = 100, message = "O titulo do guia deve ter no maximo 100 caracteres") String tituloGuia) {
-        this.tituloGuia = tituloGuia;
-    }
-
-    public String getDescGuia() {
-        return descGuia;
-    }
-
-    public void setDescGuia(String descGuia) {
-        this.descGuia = descGuia;
-    }
-
-    public @NotNull(message = "O id do museu não deve ser nulo") Long getIdMuseu() {
-        return idMuseu;
-    }
-
-    public void setIdMuseu(@NotNull(message = "O id do museu não deve ser nulo") Long idMuseu) {
-        this.idMuseu = idMuseu;
-    }
-
-    public @Size(max = 500, message = "A URL da imagem deve ter no máximo 500 caracteres") String getUrlImagem() {
-        return urlImagem;
-    }
-
-    public void setUrlImagem(@Size(max = 500, message = "A URL da imagem deve ter no máximo 500 caracteres") String urlImagem) {
-        this.urlImagem = urlImagem;
-    }
-
-    @Override
-    public String toString() {
-        return "Guia{" +
-                "id=" + id +
-                ", tituloGuia='" + tituloGuia + '\'' +
-                ", descGuia='" + descGuia + '\'' +
-                ", idMuseu=" + idMuseu +
-                ", urlImagem='" + urlImagem + '\'' +
-                '}';
-    }
 }

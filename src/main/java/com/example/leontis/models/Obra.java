@@ -6,7 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 //Entidade da tabela obra
 @Entity
 public class Obra {
@@ -58,112 +64,9 @@ public class Obra {
 
     // a url é o caminho da imagem no firebase
     @Size(max=500,message = "A URL da imagem deve ter no máximo 500 caracteres")
-    @Schema(description = "URL da imagem",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media")
+    @Schema(description = "URL da imagem",example = "https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/usuarios%2Fuser.webp?alt=media&token=47824e40-be55-4657-a518-28528dcba3f7")
     @Column(name = "url_imagem")
     private String urlImagem;
 
-    // Construtor vazio
-    public Obra() {
-    }
 
-    // Construtor com todos os atributos
-    public Obra(long id, String anoInicio, String anoFinal, String descObra, String nomeObra, long idGenero, long idArtista, long idMuseu, String ulrImagem) {
-        this.id = id;
-        this.anoInicio = anoInicio;
-        this.anoFinal = anoFinal;
-        this.descObra = descObra;
-        this.nomeObra = nomeObra;
-        this.idGenero = idGenero;
-        this.idArtista = idArtista;
-        this.idMuseu = idMuseu;
-        this.urlImagem = ulrImagem;
-    }
-
-    //    Getters e Setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getAnoInicio() {
-        return anoInicio;
-    }
-
-    public void setAnoInicio(String anoInicio) {
-        this.anoInicio = anoInicio;
-    }
-
-    public String getAnoFinal() {
-        return anoFinal;
-    }
-
-    public void setAnoFinal(String anoFinal) {
-        this.anoFinal = anoFinal;
-    }
-
-    public String getDescObra() {
-        return descObra;
-    }
-
-    public void setDescObra(String descObra) {
-        this.descObra = descObra;
-    }
-
-    public String getNomeObra() {
-        return nomeObra;
-    }
-
-    public void setNomeObra(String nomeObra) {
-        this.nomeObra = nomeObra;
-    }
-
-    public long getIdGenero() {
-        return idGenero;
-    }
-
-    public void setIdGenero(long idGenero) {
-        this.idGenero = idGenero;
-    }
-
-    public long getIdArtista() {
-        return idArtista;
-    }
-
-    public void setIdArtista(long idArtista) {
-        this.idArtista = idArtista;
-    }
-
-    public long getIdMuseu() {
-        return idMuseu;
-    }
-
-    public void setIdMuseu(long idMuseu) {
-        this.idMuseu = idMuseu;
-    }
-
-    public String getUlrImagem() {
-        return urlImagem;
-    }
-
-    public void setUlrImagem(String ulrImagem) {
-        this.urlImagem = ulrImagem;
-    }
-
-    @Override
-    public String toString() {
-        return "Obra{" +
-                "id=" + id +
-                ", anoInicio='" + anoInicio + '\'' +
-                ", anoFinal='" + anoFinal + '\'' +
-                ", descObra='" + descObra + '\'' +
-                ", nomeObra='" + nomeObra + '\'' +
-                ", idGenero=" + idGenero +
-                ", idArtista=" + idArtista +
-                ", idMuseu=" + idMuseu +
-                ", urlImagem='" + urlImagem + '\'' +
-                '}';
-    }
 }

@@ -52,16 +52,16 @@ public class GuiaController {
     }
 
     @GetMapping("/selecionarTudo")
-    @Operation(summary = "Lista todas oss ordenadas por nome", description = "Retorna uma lista com as obras ordenadas por nome")
+    @Operation(summary = "Lista todas as obras ordenadas por nome", description = "Retorna uma lista com as obras ordenadas por nome")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Lista de guias retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Guia.class))),
-            @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar as guias",content = @Content),
+            @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar os guias",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
     public ResponseEntity<?> buscarTodosOrdenadoPorNome() {
         List<Guia> guias= guiaService.buscarTudo();
         if (guias.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada");
         }else {
             return ResponseEntity.status(HttpStatus.OK).body(guias);
         }
