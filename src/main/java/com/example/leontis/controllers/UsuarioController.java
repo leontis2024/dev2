@@ -102,7 +102,7 @@ public class UsuarioController {
     @Operation(summary = "Inserir usuário",description = "Insere um usuário no sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Usuário inserido com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(example = "12345"))),
-            @ApiResponse(responseCode = "404",description = "Campos com entrada inesperada: Erro no campo preço:preço deve ser númerico",content = @Content),
+            @ApiResponse(responseCode = "400",description = "Campos com entrada inesperada: Erro no campo preço:preço deve ser númerico",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro no servidor",content = @Content)
     })
     public ResponseEntity<?> inserirUsuario(@Valid @RequestBody Usuario usuario) {
@@ -196,6 +196,9 @@ public class UsuarioController {
             }
             if (updates.containsKey("senha")) {
                 usuario1.setSenha(updates.get("senha").toString());
+            }
+            if (updates.containsKey("urlImagem")){
+                usuario1.setUrlImagem(updates.get("urlImagem").toString());
             }
             Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario1);
             if (!violations.isEmpty()) {

@@ -4,6 +4,7 @@ import com.example.leontis.models.Usuario;
 import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.repository.UsuarioMuseuRepository;
 import com.example.leontis.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class UsuarioMuseuService {
         return usuarios;
     }
 
+    @Transactional
     public Long seguir(Long id_user, Long id_museu ){
         UsuarioMuseu usuarioMuseu = usuarioMuseuRepository.findUsuarioMuseuByIdUsuarioAndIdMuseu(id_user, id_museu);
         if (usuarioMuseu != null) {
@@ -73,6 +75,7 @@ public class UsuarioMuseuService {
     }
 
 //    método para excluir relação usuario/museu
+    @Transactional
     public Boolean deixarSeguir(Long id_user, Long id_museu){
 
         UsuarioMuseu usuarioMuseu = usuarioMuseuRepository.findUsuarioMuseuByIdUsuarioAndIdMuseu(id_user, id_museu);

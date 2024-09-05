@@ -7,7 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 //Entidade da tabela usuarioMuseu
 @Entity
 public class UsuarioMuseu {
@@ -28,49 +34,5 @@ public class UsuarioMuseu {
     @Column(name = "id_usuario")
     private Long idUsuario;
 
-    // Construtor vazio
-    public UsuarioMuseu() {
-    }
 
-    // Construtor com todos os atributos
-    public UsuarioMuseu(Long id, Long idMuseu, Long idUsuario) {
-        this.id = id;
-        this.idMuseu = idMuseu;
-        this.idUsuario = idUsuario;
-    }
-
-    //    Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdMuseu() {
-        return idMuseu;
-    }
-
-    public void setIdMuseu(Long idMuseu) {
-        this.idMuseu = idMuseu;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    //    To string com todos os atributos
-    @Override
-    public String toString() {
-        return "UsuarioMuseu{" +
-                "id='" + id + '\'' +
-                ", idMuseu='" + idMuseu + '\'' +
-                ", idUsuario='" + idUsuario + '\'' +
-                '}';
-    }
 }
