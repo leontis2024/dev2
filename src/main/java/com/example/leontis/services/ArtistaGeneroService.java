@@ -26,5 +26,12 @@ public class ArtistaGeneroService {
         return artistaGeneroRepository.findAll();
     }
 
+    public List<ArtistaGenero> buscarPorGenero(Long genero) {
+        return artistaGeneroRepository.findByIdGenero(genero);
+    }
+
+    public List<ArtistaGenero> buscarPorArtista(Long artista) {
+        return artistaGeneroRepository.findByIdArtista(artista);
+    }
 
 }
