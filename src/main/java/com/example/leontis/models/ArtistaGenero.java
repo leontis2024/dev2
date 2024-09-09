@@ -13,12 +13,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//Entidade da tabela usuarioGenero
+//Entidade da tabela artistaGenero
 @Entity
-public class UsuarioGenero {
-    //    Id da relação usuario/genero é um long de 5 digitos
+public class ArtistaGenero {
+    //    Id da relação artista/genero é um long de 5 digitos
     @Id
-    @Schema(description = "Id da relação Usuário/Genero ",example = "12345")
+    @Schema(description = "Id da relação Artista/Genero ",example = "12345")
     private Long id;
     //    o id do genero é um long de 5 digitos
     @Schema(description = "Id do genero",example = "12345")
@@ -27,9 +27,9 @@ public class UsuarioGenero {
     @Column(name = "id_genero")
     private Long idGenero;
     //    o id do usuário é um long de 5 digitos
-    @Schema(description = "Id do usuário",example = "12345")
+    @Schema(description = "Id do artista",example = "12345")
     @Digits(integer = 5, fraction = 0)
-    @NotNull(message = "O id_usuario não pode ser nulo")
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    @NotNull(message = "O id_artista não pode ser nulo")
+    @Column(name = "id_artista")
+    private Long idArtista;
 }
