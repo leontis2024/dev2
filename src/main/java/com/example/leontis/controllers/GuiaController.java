@@ -52,7 +52,7 @@ public class GuiaController {
     }
 
     @GetMapping("/selecionarTudo")
-    @Operation(summary = "Lista todas as obras ordenadas por nome", description = "Retorna uma lista com as obras ordenadas por nome")
+    @Operation(summary = "Lista todas os guias", description = "Retorna uma lista com todos os guias")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Lista de guias retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Guia.class))),
             @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar os guias",content = @Content),
