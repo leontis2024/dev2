@@ -32,7 +32,7 @@ public class ObraController {
     @GetMapping("/selecionarObraPorID/{id}")
     @Operation(summary = "Retorna o obra pelo ID", description = "Retorna uma obra de acordo com ID que foi passado como parametro")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Obra retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Obra.class))),
+            @ApiResponse(responseCode = "200",description = "Obra retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Obra.class))),
             @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o obra",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
@@ -118,14 +118,14 @@ public class ObraController {
     @GetMapping("/selecionarTudo")
     @Operation(summary = "Lista todas as obras ordenadas por nome", description = "Retorna uma lista com as obras ordenadas por nome")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Lista de obrass retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Obra.class))),
+            @ApiResponse(responseCode = "200",description = "Lista de obras retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Obra.class))),
             @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar as obras",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
     public ResponseEntity<?> buscarTodosOrdenadoPorNome() {
         List<Obra> obras= obraService.buscarTudo();
         if (obras.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada");
         }else {
             return ResponseEntity.status(HttpStatus.OK).body(obras);
         }
