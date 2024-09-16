@@ -39,7 +39,7 @@ public class Museu {
     @NotNull(message = "O id_endereco não pode ser nulo")
     private Long idEndereco;
 
-    @Column(name = "dt_inaguracao")
+    @Column(name = "dt_inauguracao")
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD")
     @Schema(description = "Data de inauguração do museu",example = "2007-09-12")
     private String dtInaguracao;

@@ -17,7 +17,7 @@ import lombok.*;
 public class Artista {
     @Id
     @Schema(description = "ID único do artista",example = "12345")
-    private int id;
+    private Long id;
 
     @Size(max = 250, message = "O nome do artista deve ter no máximo 100 caracteres")
     @Column(name = "nm_artista")
