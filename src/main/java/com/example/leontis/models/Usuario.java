@@ -65,7 +65,7 @@ private String biografia;
 
 // o sexo é uma string not null
 @NotNull(message = "O sexo não pode ser nulo")
-@Schema(description = "Genero do usuário",example = "Feminino")
+@Schema(description = "Genero do usuário",example = "F")
 private String sexo;
 
 // o apelido é uma string de no minimo 3 caracteres e no maximo 100
