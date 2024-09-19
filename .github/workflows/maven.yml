@@ -9,7 +9,6 @@
 name: Deploy no Render
 
 on:
-
   pull_request:
     branches: [ "main" ]
     types: [closed]
