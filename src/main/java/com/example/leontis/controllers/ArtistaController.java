@@ -54,7 +54,7 @@ public class ArtistaController {
     }
 
     @GetMapping("/selecionarTudo")
-    @Operation(summary = "Lista todas os artistas", description = "Retorna uma lista com todos os artistas")
+    @Operation(summary = "Lista todos os artistas", description = "Retorna uma lista com todos os artistas")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "Lista de artistas retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Artista.class))),
             @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar os artistas",content = @Content),

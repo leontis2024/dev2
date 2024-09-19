@@ -51,6 +51,7 @@ public class UsuarioService {
 //método para salvar usuario que pode ser usado  para atualizar
     @Transactional
     public Usuario salvar(Usuario usuario) {
+        Date dataNascimento = Date.valueOf(usuario.getDataNascimento());
         try {
             // Atualiza na tabela utilizando a procedure aqtualizar_usuario
             jdbcTemplate.update("CALL atualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
@@ -59,7 +60,7 @@ public class UsuarioService {
                     usuario.getSobrenome(),
                     usuario.getEmail(),
                     usuario.getTelefone(),
-                    Date.valueOf(usuario.getDataNascimento()), // Converter a String para Date
+                    dataNascimento,
                     usuario.getBiografia(),
                     usuario.getSexo(),
                     usuario.getApelido(),
