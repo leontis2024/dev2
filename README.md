@@ -1,5 +1,5 @@
 # Leontis
-Leontis é um aplicativo em desenvolvimento que será apresentado na Expo Tech 2024. O app permite escanear obras em museus, acessar guias digitais de museus, acompanhar notícias sobre o mundo da arte, entre outros recursos.
+Leontis é um aplicativo em desenvolvimento que será apresentado na Expo Tech 2024. O app permite escanear obras em museus, acessar guias digitais de museus, acompanhar notícias sobre o mundo da arte, entre outros recursos. 
 
 ## API do Leontis - Desenvolvimento II
 
@@ -52,8 +52,8 @@ http://localhost:8080/swagger-ui/index.html
  ### Commits Semânticos 
  - **Feat:** (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build) 
  - **Fix:** (correção de bug para o usuário, não uma correção para um script de build)
- - **Docs:** (mudanças na documentação)
- - **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção)
+ - **Docs:** (mudanças na documentação) 
+ - **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção) 
  - **Refactor:** (refatoração de código de produção, por exemplo, renomeando uma variável) 
  - **Test:** (adicionando testes que estavam faltando, refatorando testes; nenhuma mudança no código de produção)
 ### Equipe
