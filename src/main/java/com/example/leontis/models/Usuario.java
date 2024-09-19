@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Getter
 @Setter
@@ -53,10 +54,10 @@ private String email;
 private String telefone;
 
 // a data de nascimento é uma string que deve estar no forma aaaa-mm-dd
-@Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD")
+//@Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "A data deve estar no formato AAAA-MM-DD")
 @Column(name = "dt_nasci_usuario")
 @Schema(description = "Data de nascimento do usuário",example = "2007-09-12")
-private String dataNascimento;
+private LocalDate dataNascimento;
 
 // a biografia é" uma string que deve ter no maximo 100
 @Size(max = 100, message = "A biografia pode ter no máximo 100 caracteres")

@@ -19,6 +19,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -157,7 +158,7 @@ public class UsuarioController {
     public ResponseEntity<String> atualizarUsuario(@Parameter(description = "ID do usuário a ser atualizado")@PathVariable Long id,@io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "Mapeamento de campos a serem atualizados com os novos valores",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = "object",example="{\"nome\":\"Samira\",\"sobrenome\":\"Souza\",\"email\":\"samira.souza@gmail.com\",\"telefone\":\"(11)96313-2047\",\"dataNascimento\":\"2007-08-04\",\"biografia\":\"Oi, eu sou a Samira e estou usando o Leontis\",\"sexo\":\"Feminino\",\"apelido\":\"Sam\",\"senha\":\"12345Sam\",\"urlImagem\":\"https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media\"}"))
+                    schema = @Schema(type = "object",example="{\"nome\":\"Samira\",\"sobrenome\":\"Souza\",\"email\":\"samira.souza@gmail.com\",\"telefone\":\"(11)96313-2047\",\"dataNascimento\":\"2007-08-04\",\"biografia\":\"Oi, eu sou a Samira e estou usando o Leontis\",\"sexo\":\"F\",\"apelido\":\"Sam\",\"senha\":\"12345Sam\",\"urlImagem\":\"https://firebasestorage.googleapis.com/v0/b/leontisfotos.appspot.com/o/%s?alt=media\"}"))
     ) @Valid @RequestBody Map<String, Object> updates) {
         Usuario usuario1;
         try {
@@ -183,7 +184,7 @@ public class UsuarioController {
                 usuario1.setTelefone(updates.get("telefone").toString());
             }
             if (updates.containsKey("dataNascimento")) {
-                usuario1.setDataNascimento(updates.get("dataNascimento").toString());
+                usuario1.setDataNascimento(LocalDate.parse((String) updates.get("dataNascimento")));
             }
             if (updates.containsKey("biografia")) {
                 usuario1.setBiografia(updates.get("biografia").toString());
@@ -219,7 +220,7 @@ public class UsuarioController {
             Pattern pattern = Pattern.compile("ERROR:.*");
             Matcher matcher = pattern.matcher(log);
             if (matcher.find()) {
-                String mesage =matcher.group();
+                String mesage = matcher.group();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário: " + mesage);
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário");
