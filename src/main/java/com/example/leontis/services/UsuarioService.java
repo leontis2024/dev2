@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -51,7 +52,7 @@ public class UsuarioService {
 //método para salvar usuario que pode ser usado  para atualizar
     @Transactional
     public Usuario salvar(Usuario usuario) {
-        Date dataNascimento = Date.valueOf(usuario.getDataNascimento());
+
         try {
             // Atualiza na tabela utilizando a procedure aqtualizar_usuario
             jdbcTemplate.update("CALL atualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
@@ -60,7 +61,7 @@ public class UsuarioService {
                     usuario.getSobrenome(),
                     usuario.getEmail(),
                     usuario.getTelefone(),
-                    dataNascimento,
+                    usuario.getDataNascimento(),
                     usuario.getBiografia(),
                     usuario.getSexo(),
                     usuario.getApelido(),
