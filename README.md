@@ -6,18 +6,19 @@ Leontis é um aplicativo em desenvolvimento que será apresentado na Expo Tech 2
 ### Descrição
 Esse repositório guarda as APIs do aplicativo Leontis. 
 A *API REST* desenvolvida com *Spring Boot* permite a comunicação entre a interface e o banco de dados **SQL** além de autenticação de acesso para segurança.
-A *API REST* desenvolvida com *Spring Boot* permite que uma imagem cadastrada pelo usuário seja guardada no banco **Firebase** e retorna como resposta o link da imagem.
+
 
 ### Funcionalidades
 1. **Gerenciamento de usuários:**
    - Operações CRUD (Create, Read, Update, Delete)
-2. **Gerenciamento de imagens:**
-   - Upload de imagens no banco de dados
-   - Retorno do link da imagem
-3. **Gerenciamento da relação usuário/museus**:
+2. **Gerenciamento da relação usuário/museus**:
    - Seguir museus
    - Deixar de seguir museus
    - Consultar museus seguidos por um usuário
+3. **Gerenciamento da relação gênero/usuário:**
+   - Manifestar interesse em um gênero
+   - Deixar de ter interesse em um genero
+   - Consultar interesses de um usuário
 4. **Gerenciamento da relação gênero/usuário:**
    - Manifestar interesse em um gênero
    - Deixar de ter interesse em um genero
