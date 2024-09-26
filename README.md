@@ -32,9 +32,9 @@ A *API REST* desenvolvida com *Spring Boot* permite a comunicação entre a inte
 9. **Gerenciamento de busca guia:**
    - Consultar guias
 10. **Gerenciamento de busca museu:**
-   - Consultar museus
+    - Consultar museus
 11. **Gerenciamento de busca obra:**
-   - Consultar obras
+    - Consultar obras
 
 
 ## Tecnologias Utilizadas
