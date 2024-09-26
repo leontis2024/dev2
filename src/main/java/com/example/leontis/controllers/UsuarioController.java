@@ -75,12 +75,16 @@ public class UsuarioController {
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
     public ResponseEntity<?> buscarUsuarioPorEmail(@Parameter(description = "Email do usuário a ser retornado")@RequestParam  String email) {
-        Usuario usuario=usuarioService.buscarUsuarioPorEmail(email);
-        if (usuario==null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar o usuário pelo email que foi informado");
-        }else {
-            return ResponseEntity.status(HttpStatus.OK).body(usuario);
-        }
+       try{
+           Usuario usuario=usuarioService.buscarUsuarioPorEmail(email);
+           if (usuario==null){
+               return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar o usuário pelo email que foi informado");
+           }else {
+               return ResponseEntity.status(HttpStatus.OK).body(usuario);
+           }
+       }catch (RuntimeException re){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar o usuário pelo email que foi informado");
+       }
     }
 
     @GetMapping("/selecionarPorTelefone")
