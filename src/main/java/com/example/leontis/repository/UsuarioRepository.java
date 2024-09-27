@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, String> {
-    @Modifying
-    @Query("DELETE FROM Usuario e WHERE e.id = ?1")
-    void deleteById(Long id);
-    Usuario findByEmail_usuarioLikeIgnoreCase(String email);
-    Usuario findByNr_tel_usuarioLikeIgnoreCase(String tel);
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+
+//  assinatura de um método para buscar usuário por parametros especificos
+    Usuario findByEmailLikeIgnoreCase(String email);
+    Usuario findByTelefone(String tel);
 
 
 
