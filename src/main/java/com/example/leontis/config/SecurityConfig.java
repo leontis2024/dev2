@@ -1,8 +1,9 @@
 package com.example.leontis.config;
-import com.example.leontis.services.CustomUserDetailsService;
+import com.example.leontis.CustomUserDetailsService;
 import com.example.leontis.JwtAuthenticatorFilter;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,7 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST).permitAll()
                         .requestMatchers("/swagger-ui/**",  "/v3/api-docs/**","/api/usuario/inserir","/favicon.ico/**").permitAll()
-                        .requestMatchers("/api/auth/login","/api/genero/selecionarTodosGenerosParcial","/api/usuario/atualizar/**","/api/usuarioGenero/inserir").permitAll()
+                        .requestMatchers("/api/auth/login","/api/genero/selecionarTodosGenerosParcial","/api/usuario/atualizar").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
