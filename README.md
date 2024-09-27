@@ -37,6 +37,7 @@ A *API REST* desenvolvida com *Spring Boot* permite a comunicação entre a inte
    - Consultar obras
 
 
+
 ## Tecnologias Utilizadas
 - *Spring Boot*: Framework principal para o desenvolvimento da API.
 - *Postgres SQL*: Banco de dados usado para o armazenamento de dados.
@@ -70,13 +71,15 @@ https://dev2-tfqz.onrender.com/swagger-ui/index.html
 - */api/guia*: Gerenciamento de busca de guia.
 - */api/museu*: Gerenciamento de busca de museu.
 - */api/obra*: Gerenciamento de busca de obra.
-### Commits Semânticos
-- **Feat:** (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build)
-- **Fix:** (correção de bug para o usuário, não uma correção para um script de build)
-- **Docs:** (mudanças na documentação)
-- **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção)
-- **Refactor:** (refatoração de código de produção, por exemplo, renomeando uma variável)
-- **Test:** (adicionando testes que estavam faltando, refatorando testes; nenhuma mudança no código de produção)
+
+ ### Commits Semânticos 
+ - **Feat:** (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build) 
+ - **Fix:** (correção de bug para o usuário, não uma correção para um script de build)
+ - **Docs:** (mudanças na documentação) 
+ - **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção) 
+ - **Refactor:** (refatoração de código de produção, por exemplo, renomeando uma variável) 
+ - **Test:** (adicionando testes que estavam faltando, refatorando testes; nenhuma mudança no código de produção)
+
 ### Equipe
 ❤️ Feito com carinho por:
 - [Ana Romera](https://github.com/anaBeatrizRomera)

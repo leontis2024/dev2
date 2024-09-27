@@ -1,35 +1,40 @@
-package com.example.leontis.services;
 
-import com.example.leontis.models.Usuario;
-import com.example.leontis.repository.UsuarioRepository;
+package com.example.javaapisecuritytoken.services;
 
+
+import com.example.javaapisecuritytoken.models.Users;
+import com.example.javaapisecuritytoken.repository.UsersRepository;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
+import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UsuarioRepository usersRepository;
+    private final UsersRepository usersRepository;
 
-    public CustomUserDetailsService(UsuarioRepository usersRepository) {
+    public CustomUserDetailsService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario users = usersRepository.findByEmailLikeIgnoreCase(username);
+        Users users = usersRepository.findByUsername(username);
 
         return new org.springframework.security.core.userdetails.User(
-                users.getEmail(),
-                users.getSenha(),
+                users.getUsername(),
+                users.getPassword(),
+                users.isEnabled(),
                 true,
                 true,
                 true,
-                true,
-                new ArrayList<>()
+                users.getRoles().stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getName()))
+                        .collect(Collectors.toList())
         );
     }
 }
