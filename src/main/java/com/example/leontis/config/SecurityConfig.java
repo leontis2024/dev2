@@ -1,9 +1,8 @@
 package com.example.leontis.config;
-import com.example.leontis.CustomUserDetailsService;
+import com.example.leontis.services.CustomUserDetailsService;
 import com.example.leontis.JwtAuthenticatorFilter;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
