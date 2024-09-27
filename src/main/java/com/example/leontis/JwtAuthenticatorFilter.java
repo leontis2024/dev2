@@ -1,5 +1,6 @@
 package com.example.leontis;
 
+import com.example.leontis.services.CustomUserDetailsService;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
