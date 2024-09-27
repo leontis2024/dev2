@@ -1,10 +1,10 @@
 # Leontis
-Leontis é um aplicativo em desenvolvimento que será apresentado na Expo Tech 2024. O app permite escanear obras em museus, acessar guias digitais de museus, acompanhar notícias sobre o mundo da arte, entre outros recursos. 
+Leontis é um aplicativo em desenvolvimento que será apresentado na Expo Tech 2024. O app permite escanear obras em museus, acessar guias digitais de museus, acompanhar notícias sobre o mundo da arte, entre outros recursos.
 
 ## API do Leontis - Desenvolvimento II
 
 ### Descrição
-Esse repositório guarda as APIs do aplicativo Leontis. 
+Esse repositório guarda as APIs do aplicativo Leontis.
 A *API REST* desenvolvida com *Spring Boot* permite a comunicação entre a interface e o banco de dados **SQL** além de autenticação de acesso para segurança.
 
 
@@ -32,9 +32,10 @@ A *API REST* desenvolvida com *Spring Boot* permite a comunicação entre a inte
 9. **Gerenciamento de busca guia:**
    - Consultar guias
 10. **Gerenciamento de busca museu:**
-    - Consultar museus
+   - Consultar museus
 11. **Gerenciamento de busca obra:**
-    - Consultar obras
+   - Consultar obras
+
 
 
 ## Tecnologias Utilizadas
@@ -43,19 +44,19 @@ A *API REST* desenvolvida com *Spring Boot* permite a comunicação entre a inte
 - *Swagger*: Ferramenta para documentação interativa da API.
 
 ### Passos do projeto:
- - [x] Criação da API de dados de cadastro(SQL)
- - [x] Contrução da parte da API para usuários(SQL)
- - [x] Contrução da parte da API para relação usuário/museu(SQL) 
- - [X] Contrução da parte da API para relação usuário/gênero(SQL)
- - [X] Contrução da parte da API para obras(SQL)
- - [X] Contrução da parte da API para gênero(SQL)
- - [X] Contrução da parte da API para guia(SQL)
- - [X] Contrução da parte da API para relação obra/guia(SQL)
- - [X] Contrução da parte da API para artistas(SQL)
- - [X] Contrução da parte da API para funcionamento(SQL)
- - [X] Contrução da parte da API para interações(MongoDB)
+- [x] Criação da API de dados de cadastro(SQL)
+- [x] Contrução da parte da API para usuários(SQL)
+- [x] Contrução da parte da API para relação usuário/museu(SQL)
+- [X] Contrução da parte da API para relação usuário/gênero(SQL)
+- [X] Contrução da parte da API para obras(SQL)
+- [X] Contrução da parte da API para gênero(SQL)
+- [X] Contrução da parte da API para guia(SQL)
+- [X] Contrução da parte da API para relação obra/guia(SQL)
+- [X] Contrução da parte da API para artistas(SQL)
+- [X] Contrução da parte da API para funcionamento(SQL)
+- [X] Contrução da parte da API para interações(MongoDB)
 
-### Links 
+### Links
 https://dev2-tfqz.onrender.com/swagger-ui/index.html
 
 ### Principais endpoints
@@ -70,6 +71,7 @@ https://dev2-tfqz.onrender.com/swagger-ui/index.html
 - */api/guia*: Gerenciamento de busca de guia.
 - */api/museu*: Gerenciamento de busca de museu.
 - */api/obra*: Gerenciamento de busca de obra.
+
  ### Commits Semânticos 
  - **Feat:** (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build) 
  - **Fix:** (correção de bug para o usuário, não uma correção para um script de build)
@@ -77,6 +79,7 @@ https://dev2-tfqz.onrender.com/swagger-ui/index.html
  - **Style:** (formatação, falta de ponto e vírgula, etc.; nenhuma mudança no código de produção) 
  - **Refactor:** (refatoração de código de produção, por exemplo, renomeando uma variável) 
  - **Test:** (adicionando testes que estavam faltando, refatorando testes; nenhuma mudança no código de produção)
+
 ### Equipe
 ❤️ Feito com carinho por:
 - [Ana Romera](https://github.com/anaBeatrizRomera)
