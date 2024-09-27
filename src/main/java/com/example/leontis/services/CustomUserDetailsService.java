@@ -23,6 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Usuario users = usersRepository.findByEmailLikeIgnoreCase(username);
 
         return new org.springframework.security.core.userdetails.User(
+
                 users.getEmail(),
                 users.getSenha(),
                 true,
