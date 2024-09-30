@@ -27,8 +27,8 @@ public class JwtAuthenticatorFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
         throws ServletException,IOException {
             String authHeader = request.getHeader("Authorization");
-            if (authHeader != null ) {
-                String token = authHeader;
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                String token = authHeader.replace("Bearer ", "");
                 try {
                     String email = Jwts.parserBuilder()
                             .setSigningKey(secretKey)
