@@ -65,7 +65,7 @@ public class AuthController {
                 logger.info("Generated Refresh Token: {}", refreshToken);
 
                 // Retornar ambos os tokens
-                return Map.of("accessToken", "Bearer " + accessToken, "refreshToken", refreshToken);
+                return Map.of("accessToken", "Bearer " + accessToken, "refreshToken","Bearer "+ refreshToken);
             } catch (Exception e) {
                 logger.error("Erro ao gerar os tokens JWT", e);
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar os tokens JWT", e);
