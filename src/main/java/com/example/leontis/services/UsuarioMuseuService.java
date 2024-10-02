@@ -1,6 +1,7 @@
 package com.example.leontis.services;
 
 import com.example.leontis.models.Usuario;
+import com.example.leontis.models.UsuarioGenero;
 import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.repository.UsuarioMuseuRepository;
 import com.example.leontis.repository.UsuarioRepository;
@@ -94,5 +95,9 @@ public class UsuarioMuseuService {
             return false;
         }
 
+    }
+    public UsuarioMuseu buscarSeExiste(Long id_user, Long id_museu){
+        UsuarioMuseu usuarioMuseu = usuarioMuseuRepository.findByIdMuseuAndIdUsuario(id_user,id_museu).orElseThrow(RuntimeException::new);
+        return usuarioMuseu;
     }
 }

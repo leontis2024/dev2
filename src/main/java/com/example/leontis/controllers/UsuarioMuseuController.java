@@ -1,6 +1,7 @@
 package com.example.leontis.controllers;
 
 import com.example.leontis.models.Usuario;
+import com.example.leontis.models.UsuarioGenero;
 import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.services.UsuarioMuseuService;
 import com.example.leontis.services.UsuarioService;
@@ -76,4 +77,20 @@ public class UsuarioMuseuController {
         }
     }
 
+    @GetMapping("/buscarSeExiste")
+    @Operation(summary = "Verifica relação", description = "Se a relação existir retorna um objeto usário/museu se não devolve um not found")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Lista de relações retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = UsuarioMuseu.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar as relações",content = @Content)
+    })
+    public ResponseEntity<?> buscarSeEsxiste(@Parameter(description = "ID do usuário que deve ser retornada a lista de relação")@Valid @RequestParam Long usuario,@Valid @RequestParam Long museu) {
+
+        try {
+            UsuarioMuseu relacao = usuarioMuseuService.buscarSeExiste(usuario,museu);
+            return ResponseEntity.status(HttpStatus.OK).body(relacao);
+
+        }catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar relação");
+        }
+    }
 }
