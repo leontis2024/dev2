@@ -97,4 +97,9 @@ public class UsuarioGeneroService {
 
     }
 
+    public UsuarioGenero buscarSeExiste(Long id_user, Long id_genero){
+        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero,id_user).orElseThrow(RuntimeException::new);
+        return usuarioGenero;
+    }
+
 }

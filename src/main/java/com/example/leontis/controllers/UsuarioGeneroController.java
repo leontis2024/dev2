@@ -76,4 +76,20 @@ public class UsuarioGeneroController {
         }
     }
 
+    @GetMapping("/buscarSeExiste")
+    @Operation(summary = "Verifica relação", description = "Se a relação existir retorna um objeto usário/genero se não devolve um not found")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Lista de relações retornada com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = UsuarioGenero.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar as relações",content = @Content)
+    })
+    public ResponseEntity<?> buscarSeEsxiste(@Parameter(description = "ID do usuário que deve ser retornada a lista de relação")@Valid @RequestParam Long usuario,@Valid @RequestParam Long genero) {
+
+       try {
+           UsuarioGenero relacao = usuarioGeneroService.buscarSeExiste(usuario,genero);
+           return ResponseEntity.status(HttpStatus.OK).body(relacao);
+
+       }catch (RuntimeException e) {
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar relação");
+       }
+    }
 }
