@@ -97,7 +97,7 @@ public class UsuarioMuseuService {
 
     }
     public UsuarioMuseu buscarSeExiste(Long id_user, Long id_museu){
-        UsuarioMuseu usuarioMuseu = usuarioMuseuRepository.findByIdMuseuAndIdUsuario(id_user,id_museu).orElseThrow(RuntimeException::new);
+        UsuarioMuseu usuarioMuseu = usuarioMuseuRepository.findByIdMuseuAndIdUsuario(id_museu,id_user).orElseThrow(RuntimeException::new);
         return usuarioMuseu;
     }
 }
