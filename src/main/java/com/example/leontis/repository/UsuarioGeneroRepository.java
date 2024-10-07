@@ -11,6 +11,5 @@ public interface UsuarioGeneroRepository extends JpaRepository<UsuarioGenero, Lo
 
     //  assinatura de um método para buscar usuário por parametros especificos
     List<UsuarioGenero> findByIdUsuario(Long idUsuario);
-    UsuarioGenero findUsuarioMuseuByIdUsuarioAndIdGenero(Long idUsuario, Long idGenero);
-    Optional<UsuarioGenero> findByIdGeneroAndIdUsuario(Long idGenero, Long idUsuario);
+    UsuarioGenero findByIdGeneroAndIdUsuario(Long idGenero, Long idUsuario);
 }

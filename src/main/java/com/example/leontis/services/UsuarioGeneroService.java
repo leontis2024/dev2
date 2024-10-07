@@ -78,8 +78,7 @@ public class UsuarioGeneroService {
     //    método para excluir relação usuario/genero
     @Transactional
     public Boolean excluir(Long id_user, Long id_genero){
-
-        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
+        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero, id_user);
         if (usuarioGenero == null) {
             return false;
         }
@@ -88,7 +87,7 @@ public class UsuarioGeneroService {
                 id_user,
                 id_genero);
 //        verifica se realmente foi excluido
-        usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
+        usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero, id_user);
         if (usuarioGenero == null) {
             return true;
         }else {
