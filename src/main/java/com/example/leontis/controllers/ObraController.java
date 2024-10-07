@@ -106,7 +106,7 @@ public class ObraController {
             @ApiResponse(responseCode = "404",description = "Não foi possivel encontrar as obras",content = @Content),
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
-    public ResponseEntity<?> buscarPorArtista(@Parameter(description = "ID do artista para retorno da lista de obras")@Valid @RequestParam Long id) {
+    public ResponseEntity<?> buscarPorArtista(@Parameter(description = "ID do artista para retorno da lista de obras")@Valid Long id) {
         List<Obra> obras= obraService.buscarPorArtista(id);
         if (obras.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
