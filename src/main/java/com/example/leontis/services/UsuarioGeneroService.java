@@ -33,7 +33,7 @@ public class UsuarioGeneroService {
     //    método para adicionar relação usuario/genero
     @Transactional
     public Long adicionar(Long id_user, Long id_genero ){
-        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
+        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero, id_user);
         if (usuarioGenero != null) {
             return 0l;
         }
@@ -65,7 +65,7 @@ public class UsuarioGeneroService {
         idNumero = Long.parseLong(numero);
         // Insere na tabela associativa utilizando a procedure gerenciar_generos_usuario
         jdbcTemplate.update("CALL gerenciar_generos_usuario(?, ?,?)",idNumero, id_user, id_genero);
-        usuarioGenero = usuarioGeneroRepository.findUsuarioMuseuByIdUsuarioAndIdGenero(id_user, id_genero);
+        usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero, id_user);
 
         if (usuarioGenero!= null) {
             return usuarioGenero.getId(); // Retorna o ID gerado automaticamente
@@ -97,7 +97,10 @@ public class UsuarioGeneroService {
     }
 
     public UsuarioGenero buscarSeExiste(Long id_user, Long id_genero){
-        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero,id_user).orElseThrow(RuntimeException::new);
+        UsuarioGenero usuarioGenero = usuarioGeneroRepository.findByIdGeneroAndIdUsuario(id_genero,id_user);
+        if (usuarioGenero == null) {
+            throw new RuntimeException();
+        }
         return usuarioGenero;
     }
 
