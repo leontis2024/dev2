@@ -1,9 +1,7 @@
 package com.example.leontis.controllers;
 
 import com.example.leontis.models.UsuarioGenero;
-import com.example.leontis.models.UsuarioMuseu;
 import com.example.leontis.services.UsuarioGeneroService;
-import com.example.leontis.services.UsuarioMuseuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -67,12 +65,12 @@ public class UsuarioGeneroController {
             @ApiResponse(responseCode = "200",description = "A relação foi excluida com sucesso",content = @Content),
             @ApiResponse(responseCode = "400",description = "Não foi possivel excluir a relação",content = @Content)
     })
-    public ResponseEntity<?> deixarSeguirMuseu(@Parameter(description = "ID do usuário que deve se relacionar com o gênero")@Valid @RequestParam Long id_user,@Parameter(description = "ID do genero que deve se relacionar com o usuário") @RequestParam Long id_genero) {
+    public ResponseEntity<?> excluiUsuarioGenero(@Parameter(description = "ID do usuário que deve se relacionar com o gênero")@Valid @RequestParam Long id_user, @Parameter(description = "ID do genero que deve se relacionar com o usuário") @RequestParam Long id_genero) {
         Boolean apagar = usuarioGeneroService.excluir(id_user,id_genero);
         if (apagar) {
-            return ResponseEntity.status(HttpStatus.OK).body("O usuário deixou de seguir o museu");
+            return ResponseEntity.status(HttpStatus.OK).body("O usuário deixou de ter interesse no genero");
         }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possivel deixar de seguir o museu");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possivel deixar de ter interesse no genero");
         }
     }
 
