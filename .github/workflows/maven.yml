@@ -39,7 +39,7 @@ jobs:
     - name: Deploy to EC2
       run: |
            echo "${{secrets.key_G}}" >private_key && chmod 600 private_key
-           ssh  -o StrictHostKeyChecking=no -i "chavesSpringEC2.pem" ubuntu@ec2-3-229-108-221.compute-1.amazonaws.com "
+           ssh  -o StrictHostKeyChecking=no -i "private_key" ubuntu@ec2-3-229-108-221.compute-1.amazonaws.com "
            cd /home/ubuntu/dev2 &&
              git pull origin main &&
              mvn clean package -DskipTests &&
