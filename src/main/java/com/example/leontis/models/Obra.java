@@ -2,11 +2,14 @@ package com.example.leontis.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter

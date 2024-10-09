@@ -131,4 +131,39 @@ public class ObraController {
         }
     }
 
+    @GetMapping("/selecionarPorGeneros")
+    @Operation(summary = "Lista todas as obras por gêneros", description = "Retorna uma lista com as obras que possuem os gêneros informados mas se a lista estiver vazia retorna todas as obras")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de obras retornada com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Obra.class))),
+            @ApiResponse(responseCode = "404", description = "Não foi possível encontrar obras com os gêneros informados", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
+    })
+    public ResponseEntity<?> buscarPorGeneros(
+            @Parameter(description = "Lista de gêneros para retorno das obras") @Valid @RequestBody List<Long> generos) {
+        List<Obra> obras = obraService.buscarObrasPorGeneros(generos);
+        if (obras.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foram encontradas obras com os gêneros informados");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(obras);
+        }
+    }
+
+    @GetMapping("/selecionarPorMuseus")
+    @Operation(summary = "Lista todas as obras por museus", description = "Retorna uma lista com as obras que possuem os museus informados mas se a lista estiver vazia retorna todas as obras")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de obras retornada com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Obra.class))),
+            @ApiResponse(responseCode = "404", description = "Não foi possível encontrar obras com os museus informados", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
+    })
+    public ResponseEntity<?> buscarPorMuseus(
+            @Parameter(description = "Lista de museus para retorno das obras") @Valid @RequestBody List<Long> museus) {
+        List<Obra> obras = obraService.buscarObrasPorMuseus(museus);
+        if (obras.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foram encontradas obras com os museus s informados");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(obras);
+        }
+    }
+
+
 }

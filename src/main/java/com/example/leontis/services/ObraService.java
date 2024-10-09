@@ -41,4 +41,19 @@ public class ObraService {
         return obraRepository.findAllByOrderByNomeObraAsc();
     }
 
+    public List<Obra> buscarObrasPorGeneros(List<Long> generos) {
+        if (generos.isEmpty()){
+            return obraRepository.findAllByOrderByNomeObraAsc();
+        }else {
+            return obraRepository.findAllByGeneros(generos);
+        }
+    }
+
+    public List<Obra> buscarObrasPorMuseus(List<Long> museus) {
+        if (museus.isEmpty()){
+            return obraRepository.findAllByOrderByNomeObraAsc();
+        }else {
+            return obraRepository.findAllByMuseus(museus);
+        }
+    }
 }
