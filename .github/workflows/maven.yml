@@ -34,3 +34,13 @@ jobs:
       with:
         service-id: ${{secrets.serviceid}}
         api-key: ${{secrets.apikey}}
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Deploy to EC2
+      run: |
+           echo "${{secrets.key_G}}" >private_key && chmod 600 private_key
+           ssh  -o StrictHostKeyChecking=no -i "private_key" ubuntu@ec2-52-22-92-75.compute-1.amazonaws.com "
+           cd /home/ubuntu/dev2 &&
+             git pull origin main &&
+             mvn clean package -DskipTests &&
+             ./executar.sh"
