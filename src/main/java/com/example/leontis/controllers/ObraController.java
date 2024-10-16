@@ -139,7 +139,7 @@ public class ObraController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
     })
     public ResponseEntity<?> buscarPorGeneros(
-            @Parameter(description = "Lista de gêneros para retorno das obras") @Valid @RequestBody List<Long> generos) {
+            @Parameter(description = "Lista de gêneros para retorno das obras") @Valid @RequestParam List<Long> generos) {
         List<Obra> obras = obraService.buscarObrasPorGeneros(generos);
         if (obras.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foram encontradas obras com os gêneros informados");
@@ -156,7 +156,7 @@ public class ObraController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
     })
     public ResponseEntity<?> buscarPorMuseus(
-            @Parameter(description = "Lista de museus para retorno das obras") @Valid @RequestBody List<Long> museus) {
+            @Parameter(description = "Lista de museus para retorno das obras") @Valid @RequestParam List<Long> museus) {
         List<Obra> obras = obraService.buscarObrasPorMuseus(museus);
         if (obras.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foram encontradas obras com os museus s informados");
