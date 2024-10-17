@@ -91,7 +91,7 @@ public class ObraController {
             @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
     })
     public ResponseEntity<?> buscarPorMuseu(@Parameter(description = "ID do museu para retorno da lista de obras")@Valid @PathVariable Long id) {
-        List<Obra> obras= obraService.buscarPorGenero(id);
+        List<Obra> obras= obraService.buscarPorMuseu(id);
         if (obras.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Obra não econtrada nâo encontrado");
         }else {
