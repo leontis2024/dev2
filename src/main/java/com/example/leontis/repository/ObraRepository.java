@@ -18,5 +18,6 @@ public interface ObraRepository extends JpaRepository<Obra, Long> {
     List<Obra> findAllByGeneros(List<Long> generos);
     @Query("SELECT o FROM Obra o WHERE o.idMuseu IN :museus")
     List<Obra> findAllByMuseus(List<Long> museus);
+    List<Obra> findByNomeObraContainingIgnoreCase(String nomeObra);
 
 }
