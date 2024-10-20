@@ -27,4 +27,14 @@ public class GuiaService {
     public List<Guia> buscarTudo() {
         return guiaRepository.findAll();
     }
+
+    public Guia buscarPorNome(String nome){
+        Guia guia = guiaRepository.findByTituloGuia(nome).orElseThrow(RuntimeException::new);
+        return guia;
+    }
+
+    public List<Guia> pesquisarGuias(String pesquisa) {
+        return guiaRepository.findByTituloGuiaContainingIgnoreCase(pesquisa);
+    }
 }
+

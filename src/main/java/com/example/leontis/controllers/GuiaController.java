@@ -14,10 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -86,6 +83,38 @@ public class GuiaController {
         }
     }
 
-
+    @GetMapping("/selecionarGuiaBuscarPorNome/{nome}")
+    @Operation(summary = "Retorna o guia pelo nome", description = "Retorna um guia de acordo com o nome que foi passado como parametro")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "Guia retornado com sucesso",content = @Content(mediaType = "application/json",schema = @Schema(implementation = Guia.class))),
+            @ApiResponse(responseCode = "404",description = "Não foi possível encontrar o guia",content = @Content),
+            @ApiResponse(responseCode = "500",description = "Erro interno no servidor",content = @Content)
+    })
+    public ResponseEntity<?>buscarPorNome(@Parameter(description = "Nome do guia a ser retornado")@PathVariable String nome) {
+        try {
+            Guia guia = guiaService.buscarPorNome(nome);
+            if (guia == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este guia não existe");
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(guia);
+        }catch (RuntimeException re){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este guia não existe");
+        }
+    }
+    @GetMapping("/pesquisarGuia")
+    @Operation(summary = "Pesquisa guias por nome", description = "Retorna uma lista de guias cujo nome contém as letras fornecidas na ordem digitada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "guias retornados com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Guia.class))),
+            @ApiResponse(responseCode = "404", description = "Nenhum guia encontrado com os critérios fornecidos", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
+    })
+    public ResponseEntity<List<Guia>> pesquisarGuias(
+            @Parameter(description = "Parte do nome do guia para pesquisa") @RequestParam String pesquisa) {
+        List<Guia> guias = guiaService.pesquisarGuias(pesquisa);
+        if (guias.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(guias, HttpStatus.OK);
+    }
 
 }

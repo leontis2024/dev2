@@ -56,4 +56,7 @@ public class ObraService {
             return obraRepository.findAllByMuseus(museus);
         }
     }
+    public List<Obra> pesquisarObras(String pesquisa) {
+        return obraRepository.findByNomeObraContainingIgnoreCase(pesquisa);
+    }
 }
