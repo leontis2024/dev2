@@ -166,4 +166,21 @@ public class ObraController {
     }
 
 
+    @GetMapping("/pesquisarObra")
+    @Operation(summary = "Pesquisa obras por nome", description = "Retorna uma lista de obras cujo nome contém as letras fornecidas na ordem digitada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Obras retornadas com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Obra.class))),
+            @ApiResponse(responseCode = "404", description = "Nenhuma obra encontrada com os critérios fornecidos", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
+    })
+    public ResponseEntity<List<Obra>> pesquisarObras(
+            @Parameter(description = "Parte do nome da obra para pesquisa") @RequestParam String pesquisa) {
+        List<Obra> obras = obraService.pesquisarObras(pesquisa);
+        if (obras.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(obras, HttpStatus.OK);
+    }
+
+
 }
