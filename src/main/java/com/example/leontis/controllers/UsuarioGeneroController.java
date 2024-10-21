@@ -38,7 +38,7 @@ public class UsuarioGeneroController {
     public ResponseEntity<?> buscarPorUsuario(@Parameter(description = "ID do usuário que deve ser retornada a lista de relação")@Valid @RequestParam Long usuario) {
         List<UsuarioGenero> usuarios = usuarioGeneroService.buscarPorUsuario(usuario);
         if (usuarios.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario nâo encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(usuarios);
         }else {
             return ResponseEntity.status(HttpStatus.OK).body(usuarios);
         }
