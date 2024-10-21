@@ -34,12 +34,12 @@ public class ObraGuia {
     @NotNull(message = "O id do guia não pode ser nulo")
     @Schema(description = "ID do guia",example = "12345")
     @Column(name = "id_guia")
-    private String idGuia;
+    private Long idGuia;
 
     @NotNull(message = "O id da obra não pode ser nulo")
     @Schema(description = "ID da obra",example = "12345")
     @Column(name = "id_obra")
-    private String idObra;
+    private Long idObra;
 
 }
 
