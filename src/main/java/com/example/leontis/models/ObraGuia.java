@@ -31,6 +31,7 @@ public class ObraGuia {
     private String descLocalizacao;
 
 
+
     @NotNull(message = "O id do guia não pode ser nulo")
     @Schema(description = "ID do guia",example = "12345")
     @Column(name = "id_guia")
@@ -40,6 +41,7 @@ public class ObraGuia {
     @Schema(description = "ID da obra",example = "12345")
     @Column(name = "id_obra")
     private Long idObra;
+
 
 }
 
