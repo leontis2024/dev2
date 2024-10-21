@@ -42,7 +42,7 @@ public class ObraService {
     }
 
     public List<Obra> buscarObrasPorGeneros(List<Long> generos) {
-        if (generos.isEmpty()){
+        if (generos.size()==1 && generos.get(0) == -1) {
             return obraRepository.findAllByOrderByNomeObraAsc();
         }else {
             return obraRepository.findAllByGeneros(generos);
@@ -50,7 +50,7 @@ public class ObraService {
     }
 
     public List<Obra> buscarObrasPorMuseus(List<Long> museus) {
-        if (museus.isEmpty()){
+        if (museus.size()==1 && museus.get(0) == -1){
             return obraRepository.findAllByOrderByNomeObraAsc();
         }else {
             return obraRepository.findAllByMuseus(museus);
