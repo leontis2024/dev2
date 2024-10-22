@@ -1,6 +1,7 @@
 package com.example.leontis.services;
 
 import com.example.leontis.models.Museu;
+import com.example.leontis.models.Obra;
 import com.example.leontis.repository.GuiaRepository;
 import com.example.leontis.repository.MuseuRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,8 @@ public class MuseuService {
 
     public List<Museu> buscarTudo(){
         return museuRepository.findAll();
+    }
+    public List<Museu> pesquisarMuseus(String pesquisa) {
+        return museuRepository.findByNomeMuseuContainingIgnoreCase(pesquisa);
     }
 }

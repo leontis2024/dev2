@@ -14,10 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -75,6 +72,20 @@ public class GeneroController {
         return generoService.buscarTodas();
     }
 
-
+    @GetMapping("/pesquisarGenero")
+    @Operation(summary = "Pesquisa generos por nome", description = "Retorna uma lista de generos cujo nome contém as letras fornecidas na ordem digitada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Generos retornados com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Genero.class))),
+            @ApiResponse(responseCode = "404", description = "Nenhum genero encontrado com os critérios fornecidos", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
+    })
+    public ResponseEntity<List<Genero>> pesquisarGeneros(
+            @Parameter(description = "Parte do nome do genero para pesquisa") @RequestParam String pesquisa) {
+        List<Genero> generos = generoService.pesquisarGeneros(pesquisa);
+        if (generos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(generos, HttpStatus.OK);
+    }
 
 }

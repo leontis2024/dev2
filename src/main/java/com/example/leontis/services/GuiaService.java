@@ -33,8 +33,8 @@ public class GuiaService {
         return guia;
     }
 
-    public List<Guia> pesquisarGuias(String pesquisa) {
-        return guiaRepository.findByTituloGuiaContainingIgnoreCase(pesquisa);
+    public List<Guia> pesquisarGuias(Long id,String pesquisa) {
+        return guiaRepository.findByIdMuseuAndTituloGuiaContainingIgnoreCase(id,pesquisa);
     }
 }
 

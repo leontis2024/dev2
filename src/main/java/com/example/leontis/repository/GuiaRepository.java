@@ -12,7 +12,7 @@ public interface GuiaRepository extends JpaRepository<Guia, Long> {
     Optional<Guia> findById(Long id);
     List<Guia> findAll();
     Optional<Guia> findByTituloGuia(String tituloGuia);
-    List<Guia> findByTituloGuiaContainingIgnoreCase(String tituloGuia);
+    List<Guia> findByIdMuseuAndTituloGuiaContainingIgnoreCase(Long id, String tituloGuia);
 
 
 }
