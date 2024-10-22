@@ -109,8 +109,8 @@ public class GuiaController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
     })
     public ResponseEntity<List<Guia>> pesquisarGuias(
-            @Parameter(description = "Parte do nome do guia para pesquisa") @RequestParam String pesquisa) {
-        List<Guia> guias = guiaService.pesquisarGuias(pesquisa);
+            @Parameter(description = "Parte do nome do guia para pesquisa") @RequestParam String pesquisa,@Parameter(description = "ID do guia") @RequestParam Long id ) {
+        List<Guia> guias = guiaService.pesquisarGuias(id,pesquisa);
         if (guias.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
