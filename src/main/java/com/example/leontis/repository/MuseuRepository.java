@@ -13,6 +13,7 @@ public interface MuseuRepository extends JpaRepository<Museu, Long> {
     Optional<Museu> findById(Long id);
     Optional<Museu> findByNomeMuseu(String name);
     List<Museu> findAll();
+    List<Museu> findByNomeMuseuContainingIgnoreCase(String nomeMuseu);
 
 
 }

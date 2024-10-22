@@ -28,4 +28,8 @@ public class GeneroService {
     public List<Genero> buscarTodas() {
         return GeneroRepository.findAll();
     }
+
+    public List<Genero> pesquisarGeneros(String pesquisa) {
+        return GeneroRepository.findByNomeGeneroContainingIgnoreCase(pesquisa);
+    }
 }
