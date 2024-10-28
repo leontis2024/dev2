@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST).permitAll()
                         .requestMatchers("/swagger-ui/**",  "/v3/api-docs/**","/api/usuario/inserir","/favicon.ico/**").permitAll()
-                        .requestMatchers("/api/auth/login","/api/genero/selecionarTodosGenerosParcial","/api/usuario/atualizar/**","/api/usuarioGenero/inserir" ).permitAll()
+                        .requestMatchers("/api/auth/login","/api/genero/selecionarTodosGenerosParcial","/api/usuario/atualizar/**","/api/usuarioGenero/inserir","/api/museuAdm/inserir" ).permitAll()
 
                         .anyRequest().authenticated()
                 )
