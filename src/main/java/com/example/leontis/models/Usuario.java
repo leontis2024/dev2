@@ -75,7 +75,7 @@ private String sexo;
 private String apelido;
 
 // a senha é uma string not null que deve ter no minimo 3 caracteres e no maximo 100
-@NotNull(message = "A senha não pode ser nulo")
+@NotNull(message = "A senha não pode ser nula")
 @Size(min = 5, message = "A senha deve ter pelo menos 3 carcteres")
 @Size(max = 100, message = "A senha deve ter menos de 100 carcteres")
 @Column(name = "senha_usuario")
