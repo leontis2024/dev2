@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 @Tag(name="Museu ADM")
 @RestController
-@RequestMapping("/api/museu_adm")
+@RequestMapping("/api/museuAdm")
 public class MuseuAdmController {
     private final MuseuAdmService MuseuAdmService;
 
