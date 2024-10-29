@@ -14,7 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // permite CORS para todas as rotas
-                        .allowedOrigins("https://arearestrita.onrender.com") // Substitua pelo seu domínio
+                    .allowedOrigins("https://arearestritaleontis.s3.us-east-1.amazonaws.com") // Substitua pelo seu domínio
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
