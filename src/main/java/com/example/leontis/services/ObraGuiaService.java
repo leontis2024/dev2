@@ -15,6 +15,6 @@ public class ObraGuiaService {
     }
 
     public List<ObraGuia> buscarObraGuia(Long guia) {
-        return obraGuiaRepository.findByIdGuia(guia);
+        return obraGuiaRepository.findByIdGuiaOrderByNrOrdem(guia);
     }
 }
